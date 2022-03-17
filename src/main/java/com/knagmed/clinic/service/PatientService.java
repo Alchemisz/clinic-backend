@@ -1,4 +1,4 @@
-package com.knagmed.clinic.services;
+package com.knagmed.clinic.service;
 
 import com.knagmed.clinic.entity.Patient;
 

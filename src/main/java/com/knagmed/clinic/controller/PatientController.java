@@ -2,7 +2,7 @@ package com.knagmed.clinic.controller;
 
 import com.knagmed.clinic.entity.Address;
 import com.knagmed.clinic.entity.Patient;
-import com.knagmed.clinic.services.PatientService;
+import com.knagmed.clinic.service.PatientService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,7 +38,7 @@ public class PatientController {
     @GetMapping("/test")
     public ResponseEntity<Patient> getTest(){
         return new ResponseEntity<>(
-                new Patient(99330011224L,"Karol", "Ziemba", new Address("25-007", "Kielce", "2Z"))
+                new Patient(99330011224L,"Karol", "Ziemba",  new Address("25-007", "Kielce", "2Z"))
                 ,HttpStatus.OK
         );
     }

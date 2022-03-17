@@ -1,35 +1,26 @@
 package com.knagmed.clinic.entity;
 
-import com.sun.istack.NotNull;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.NumberFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
-@Data
 @NoArgsConstructor
-public class Patient {
+@Data
+public class Patient extends Person{
 
     @Id
-    @Column(name = "pesel", nullable = false, length = 11)
+    @Column(name = "pesel", nullable = false)
     private Long pesel;
 
-    @NotNull
-    private String firstName;
-
-    @NotNull
-    private String lastName;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id")
-    private Address address;
-
-    public Patient(Long pesel, String firstName, String lastName, Address address) {
+    public Patient(Long pesel,@NotNull String firstName,@NotNull String lastName, Address address) {
+        super(firstName, lastName, address);
         this.pesel = pesel;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
     }
 }
