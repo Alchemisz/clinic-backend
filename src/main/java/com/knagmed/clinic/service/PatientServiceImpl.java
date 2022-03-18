@@ -3,6 +3,11 @@ package com.knagmed.clinic.service;
 import com.knagmed.clinic.dao.PatientRepository;
 import com.knagmed.clinic.entity.Patient;
 import lombok.AllArgsConstructor;
+import lombok.Setter;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
@@ -10,8 +15,18 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@AllArgsConstructor
+@Setter
 public class PatientServiceImpl implements PatientService {
+
+    @Value("${patient.page.size}")
+    private Integer patientPageSize;
+
+    @Value("${patient.default.sort.field}")
+    private String patientDefaultSortField;
+
+    public PatientServiceImpl(PatientRepository patientRepository) {
+        this.patientRepository = patientRepository;
+    }
 
     private final PatientRepository patientRepository;
 
@@ -37,5 +52,16 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public List<Patient> getAll() {
         return patientRepository.findAll();
+    }
+
+    @Override
+    public Page<Patient> getAllByPagination(Optional<Integer> page, Optional<String> sortBy) {
+        return patientRepository.findAll(
+                PageRequest.of(
+                        page.orElse(0),
+                        patientPageSize,
+                        Sort.Direction.ASC, sortBy.orElse(patientDefaultSortField)
+                )
+        );
     }
 }
