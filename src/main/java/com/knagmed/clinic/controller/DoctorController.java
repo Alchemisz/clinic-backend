@@ -16,12 +16,24 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/doctor")
-public class DoctorController {
+public class DoctorController implements Testable<Doctor>{
 
     private final DoctorService doctorService;
 
-    @GetMapping("/test")
-    public ResponseEntity<Doctor> getTest(){
+    @GetMapping("")
+    public ResponseEntity<List<Doctor>> getDoctor(){
+        return new ResponseEntity<>(doctorService.getAll(), HttpStatus.OK);
+    }
+
+    @PostMapping()
+    public ResponseEntity<Doctor> addDoctor(@RequestBody Doctor doctor){
+        Doctor save = doctorService.save(doctor);
+        return new ResponseEntity<Doctor>(save, HttpStatus.CREATED);
+    }
+
+
+    @Override
+    public ResponseEntity<Doctor> getTestObject() {
         Doctor doctor = new Doctor("Adrian", "Mengele", new Address("26-005", "Warszawa", "37A"));
         doctor.addSpecialization(new Specialization("Neurolog"));
         return new ResponseEntity<Doctor>(
@@ -29,16 +41,4 @@ public class DoctorController {
                 , HttpStatus.OK
         );
     }
-
-    @GetMapping("")
-    public ResponseEntity<List<Doctor>> getPatient(){
-        return new ResponseEntity<>(doctorService.getAll(), HttpStatus.OK);
-    }
-
-    @PostMapping()
-    public ResponseEntity<Doctor> addPatient(@RequestBody Doctor doctor){
-        Doctor save = doctorService.save(doctor);
-        return new ResponseEntity<Doctor>(save, HttpStatus.OK);
-    }
-
 }

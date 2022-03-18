@@ -5,6 +5,7 @@ import com.knagmed.clinic.entity.Patient;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +17,15 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public Patient save(Patient patient) {
+
+        try {
+            if (patientRepository.findPatientByPesel(patient.getPesel()).isPresent())
+                throw new SQLException("PATIENT WITH THAT PESEL ALREADY EXISTS!");
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+            return null;
+        }
+
         return patientRepository.save(patient);
     }
 

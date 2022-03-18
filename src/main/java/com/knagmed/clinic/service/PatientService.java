@@ -5,9 +5,6 @@ import com.knagmed.clinic.entity.Patient;
 import java.util.List;
 import java.util.Optional;
 
-public interface PatientService {
+public interface PatientService extends BasicCrudService<Patient, Long> {
 
-    Patient save(Patient patient);
-    Optional<Patient> getById(Long id);
-    List<Patient> getAll();
 }
