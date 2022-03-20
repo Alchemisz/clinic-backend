@@ -6,8 +6,12 @@ import com.knagmed.clinic.entity.Doctor;
 import com.knagmed.clinic.entity.Patient;
 import com.knagmed.clinic.entity.Visit;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,5 +51,15 @@ public class VisitServiceImpl implements VisitService {
         }
 
         return null;
+    }
+
+    @Override
+    public Page<Visit> getByVisitDatePagination(LocalDate localDate, Optional<Integer> page) {
+        return visitRepository.findByVisitDate(
+                localDate,
+                PageRequest.of(
+                        page.orElse(0),
+                        5
+                ));
     }
 }

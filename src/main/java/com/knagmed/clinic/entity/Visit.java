@@ -3,10 +3,12 @@ package com.knagmed.clinic.entity;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.tomcat.jni.Local;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
+import java.sql.Date;
+import java.time.LocalDate;
 
 @NoArgsConstructor
 @Data
@@ -19,17 +21,17 @@ public class Visit {
     private Long id;
 
     @NotNull
-    private Date visitDate;
+    private LocalDate visitDate;
 
-    @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToOne
     @JoinColumn(name = "patient_pesel")
     private Patient patient;
 
-    @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToOne
     @JoinColumn(name = "doctor_id")
     private Doctor doctor;
 
-    public Visit(Date visitDate) {
+    public Visit(LocalDate visitDate) {
         this.visitDate = visitDate;
     }
 }

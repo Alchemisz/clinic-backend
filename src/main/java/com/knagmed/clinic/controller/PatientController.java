@@ -35,7 +35,7 @@ public class PatientController{
     }
 
     @GetMapping("/pageable")
-    Page<Patient> getPatients(@RequestParam Optional<Integer> page, @RequestParam Optional<String> sortBy){
+    public Page<Patient> getPatients(@RequestParam Optional<Integer> page, @RequestParam Optional<String> sortBy){
         return patientService.getAllByPagination(page, sortBy);
     }
 
