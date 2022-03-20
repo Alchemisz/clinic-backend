@@ -1,41 +1,34 @@
-package com.knagmed.clinic.service;
+package com.knagmed.clinic.service.visit;
 
 import com.knagmed.clinic.customRequest.VisitRequest;
 import com.knagmed.clinic.dao.VisitRepository;
 import com.knagmed.clinic.entity.Doctor;
 import com.knagmed.clinic.entity.Patient;
 import com.knagmed.clinic.entity.Visit;
-import lombok.AllArgsConstructor;
+import com.knagmed.clinic.service.doctor.DoctorService;
+import com.knagmed.clinic.service.patient.PatientService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-@AllArgsConstructor
 @Service
-public class VisitServiceImpl implements VisitService {
+public class VisitServiceImpl extends VisitService {
 
-    private VisitRepository visitRepository;
     private PatientService patientService;
     private DoctorService doctorService;
 
-    @Override
-    public Visit save(Visit visit) {
-        return visitRepository.save(visit);
-    }
+    @Value("${visit.page.size}")
+    private Integer visitPageSize;
 
-    @Override
-    public Optional<Visit> getById(Long id) {
-        return visitRepository.findById(id);
-    }
-
-    @Override
-    public List<Visit> getAll() {
-        return visitRepository.findAll();
+    public VisitServiceImpl(VisitRepository repository, PatientService patientService, DoctorService doctorService) {
+        super(repository);
+        this.patientService = patientService;
+        this.doctorService = doctorService;
     }
 
     @Override
@@ -47,7 +40,7 @@ public class VisitServiceImpl implements VisitService {
             Visit visit = new Visit(visitRequest.getVisitDate());
             visit.setDoctor(doctor.get());
             visit.setPatient(patient.get());
-            return visitRepository.save(visit);
+            return repository.save(visit);
         }
 
         return null;
@@ -55,11 +48,11 @@ public class VisitServiceImpl implements VisitService {
 
     @Override
     public Page<Visit> getByVisitDatePagination(LocalDate localDate, Optional<Integer> page) {
-        return visitRepository.findByVisitDate(
+        return repository.findByVisitDate(
                 localDate,
                 PageRequest.of(
                         page.orElse(0),
-                        5
+                        visitPageSize
                 ));
     }
 }

@@ -1,12 +1,11 @@
 package com.knagmed.clinic.config;
 
 import com.knagmed.clinic.entity.*;
-import com.knagmed.clinic.service.DoctorService;
-import com.knagmed.clinic.service.PatientService;
-import com.knagmed.clinic.service.VisitService;
+import com.knagmed.clinic.service.doctor.DoctorService;
+import com.knagmed.clinic.service.patient.PatientService;
+import com.knagmed.clinic.service.visit.VisitService;
 import org.springframework.stereotype.Component;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;

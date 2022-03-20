@@ -1,8 +1,7 @@
 package com.knagmed.clinic.controller;
 
-import com.knagmed.clinic.entity.Address;
 import com.knagmed.clinic.entity.Patient;
-import com.knagmed.clinic.service.PatientService;
+import com.knagmed.clinic.service.patient.PatientService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;

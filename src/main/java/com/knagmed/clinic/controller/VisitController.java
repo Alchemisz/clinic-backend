@@ -4,11 +4,8 @@
 package com.knagmed.clinic.controller;
 
 import com.knagmed.clinic.customRequest.VisitRequest;
-import com.knagmed.clinic.entity.Address;
-import com.knagmed.clinic.entity.Doctor;
-import com.knagmed.clinic.entity.Patient;
 import com.knagmed.clinic.entity.Visit;
-import com.knagmed.clinic.service.VisitService;
+import com.knagmed.clinic.service.visit.VisitService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
