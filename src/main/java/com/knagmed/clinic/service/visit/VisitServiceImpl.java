@@ -7,6 +7,8 @@ import com.knagmed.clinic.entity.Patient;
 import com.knagmed.clinic.entity.Visit;
 import com.knagmed.clinic.service.doctor.DoctorService;
 import com.knagmed.clinic.service.patient.PatientService;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,8 +21,8 @@ import java.util.Optional;
 @Service
 public class VisitServiceImpl extends VisitService {
 
-    private PatientService patientService;
-    private DoctorService doctorService;
+    private final PatientService patientService;
+    private final DoctorService doctorService;
 
     @Value("${visit.page.size}")
     private Integer visitPageSize;

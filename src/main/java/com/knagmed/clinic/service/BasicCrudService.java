@@ -8,5 +8,7 @@ public interface BasicCrudService<T, ID> {
     T save (T t);
     Optional<T> getById(ID id);
     List<T> getAll();
+    void deleteById(ID id);
+    T update(T t);
 
 }

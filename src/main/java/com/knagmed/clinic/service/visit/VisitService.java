@@ -5,6 +5,7 @@ import com.knagmed.clinic.dao.VisitRepository;
 import com.knagmed.clinic.entity.Visit;
 import com.knagmed.clinic.service.BasicCrudService;
 import com.knagmed.clinic.service.BasicCrudServiceImpl;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 
 import java.time.LocalDate;

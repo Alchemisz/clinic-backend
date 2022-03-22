@@ -18,12 +18,10 @@ public class PatientController{
 
     private final PatientService patientService;
 
-    @PostMapping()
+    @RequestMapping(method = {RequestMethod.POST, RequestMethod.PUT})
     public ResponseEntity<Patient> addPatient(@RequestBody Patient patient){
         Patient save = patientService.save(patient);
-
         HttpStatus responseCode = save == null ? HttpStatus.BAD_REQUEST : HttpStatus.CREATED;
-
         return new ResponseEntity<>(save, responseCode);
     }
 

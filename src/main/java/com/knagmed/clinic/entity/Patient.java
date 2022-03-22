@@ -1,14 +1,10 @@
 package com.knagmed.clinic.entity;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.Length;
-import org.springframework.format.annotation.NumberFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Entity
 @NoArgsConstructor
@@ -16,7 +12,7 @@ import javax.validation.constraints.Size;
 public class Patient extends Person{
 
     @Id
-    @Column(name = "pesel", nullable = false)
+    @Column(name = "pesel", unique = true, nullable = false)
     private Long pesel;
 
     public Patient(Long pesel,@NotNull String firstName,@NotNull String lastName, Address address) {
