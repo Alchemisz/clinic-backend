@@ -26,7 +26,7 @@ public class AppUser {
         this.password = password;
 
         StringBuilder sb = new StringBuilder();
-        roles.forEach(e -> sb.append(e + ","));
+        roles.forEach(e -> sb.append("ROLE_" + e + ","));
 
         this.roles = sb.toString();
     }

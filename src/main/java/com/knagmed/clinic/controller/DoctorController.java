@@ -5,6 +5,7 @@ import com.knagmed.clinic.service.doctor.DoctorService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/doctor")
+@PreAuthorize("hasRole('ROLE_ADMIN')")
 public class DoctorController{
 
     private final DoctorService doctorService;
