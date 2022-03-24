@@ -4,6 +4,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.apache.tomcat.jni.Local;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -24,10 +26,12 @@ public class Visit {
     private LocalDate visitDate;
 
     @OneToOne
+    @OnDelete(action = OnDeleteAction.CASCADE) //calls trigger which after deleting patient deletes also a visit
     @JoinColumn(name = "patient_pesel")
     private Patient patient;
 
     @OneToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "doctor_id")
     private Doctor doctor;
 

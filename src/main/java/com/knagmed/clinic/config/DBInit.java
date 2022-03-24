@@ -65,9 +65,21 @@ public class DBInit {
         patients.add(patientService.save(new Patient(96213762554L,"Bartek", "Jach", new Address("23-002", "Bartków", "2C"))));
         patients.add(patientService.save(new Patient(89154326551L,"Jakub", "Rubak", new Address("23-005", "Warszawa", "14A"))));
         patients.add(patientService.save(new Patient(79133345552L,"Waldemar", "Knaga", new Address("24-014", "Kraków", "2"))));
-
-        patients.add(patientService.save(new Patient(65167345972L,"Jadwikar", "Borcuch", new Address("23-024", "Kielce", "4"))));
+        patients.add(patientService.save(new Patient(65167345972L,"Jadwiga", "Borcuch", new Address("23-024", "Kielce", "4"))));
         patients.add(patientService.save(new Patient(54123545112L,"Kinga", "Biba", new Address("18-162", "Simlatów", "5"))));
+        patients.add(patientService.save(new Patient(97653545112L,"Amelia", "Kora", new Address("23-162", "Gorzałkowice", "2"))));
+
+        patients.add(patientService.save(new Patient(94231294552L,"Marcin", "Waldon", new Address("18-162", "Simlatów", "4"))));
+        patients.add(patientService.save(new Patient(89432294552L,"Arkadiusz", "Psitek", new Address("18-162", "Simlatów", "32"))));
+        patients.add(patientService.save(new Patient(83232143552L,"Bożena", "Pawlak", new Address("18-162", "Simlatów", "12A"))));
+        patients.add(patientService.save(new Patient(43419543552L,"Paweł", "Oracz", new Address("18-162", "Simlatów", "11A"))));
+        patients.add(patientService.save(new Patient(89239523256L,"Aleksander", "Knut", new Address("18-162", "Simlatów", "11C"))));
+        patients.add(patientService.save(new Patient(24241163552L,"Barbara", "Rudzka", new Address("18-163", "Borcuchów", "23D"))));
+        patients.add(patientService.save(new Patient(21159643552L,"Mateusz", "Bodzon", new Address("18-162", "Simlatów", "27A"))));
+        patients.add(patientService.save(new Patient(98123023372L,"Kacper", "Diler", new Address("18-163", "Borcuchów", "31C"))));
+
+        patients.add(patientService.save(new Patient(67431235673L,"Jakub", "Stawiarz", new Address("08-101", "Oziemiki", "16"))));
+        patients.add(patientService.save(new Patient(89245872712L,"Daniel", "Kot", new Address("18-163", "Borcuchów", "3C"))));
     }
 
 }

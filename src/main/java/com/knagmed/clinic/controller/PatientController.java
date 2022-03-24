@@ -6,9 +6,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PostAuthorize;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,32 +13,33 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/patient")
-@AllArgsConstructor
-public class PatientController{
+public class PatientController extends AbstractCrudController<Patient, Long, PatientService>{
 
-    private final PatientService patientService;
+    public PatientController(PatientService service) {
+        super(service);
+    }
 
     @RequestMapping(method = {RequestMethod.POST, RequestMethod.PUT})
     public ResponseEntity<Patient> addPatient(@RequestBody Patient patient){
-        Patient save = patientService.save(patient);
+        Patient save = service.save(patient);
         HttpStatus responseCode = save == null ? HttpStatus.BAD_REQUEST : HttpStatus.CREATED;
         return new ResponseEntity<>(save, responseCode);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Patient> getPatient(@PathVariable Long id){
-        Optional<Patient> patientOptional = patientService.getById(id);
+        Optional<Patient> patientOptional = service.getById(id);
         return patientOptional.map(patient -> new ResponseEntity<>(patient, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
     @GetMapping("/pageable")
     public Page<Patient> getPatients(@RequestParam Optional<Integer> page, @RequestParam Optional<String> sortBy){
-        return patientService.getAllByPagination(page, sortBy);
+        return service.getAllByPagination(page, sortBy);
     }
 
     @GetMapping
     public ResponseEntity<List<Patient>> getPatients(){
-        List<Patient> patients = patientService.getAll();
+        List<Patient> patients = service.getAll();
         return new ResponseEntity<>(patients, HttpStatus.OK);
     }
 }
