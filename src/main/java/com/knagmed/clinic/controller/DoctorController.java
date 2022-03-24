@@ -8,25 +8,21 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.print.Doc;
 import java.util.List;
 
-@AllArgsConstructor
 @RestController
 @RequestMapping("/doctor")
-@PreAuthorize("hasRole('ROLE_ADMIN')")
-public class DoctorController{
+//@PreAuthorize("hasRole('ROLE_ADMIN')")
+public class DoctorController extends CrudController<Doctor, Long, DoctorService>{
 
-    private final DoctorService doctorService;
+    public DoctorController(DoctorService service) {
+        super(service);
+    }
 
     @GetMapping("")
     public ResponseEntity<List<Doctor>> getDoctor(){
-        return new ResponseEntity<>(doctorService.getAll(), HttpStatus.OK);
-    }
-
-    @PostMapping()
-    public ResponseEntity<Doctor> addDoctor(@RequestBody Doctor doctor){
-        Doctor save = doctorService.save(doctor);
-        return new ResponseEntity<Doctor>(save, HttpStatus.CREATED);
+        return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
     }
 
 }
