@@ -13,5 +13,5 @@ public abstract class PatientService extends BasicCrudServiceImpl<Patient, Long,
         super(repository);
     }
 
-    public abstract Page<Patient> getAllByPagination(Optional<Integer> page, Optional<String> sortBy);
+    public abstract Page<Patient> getByPagination(Optional<Integer> page, Optional<String> value, Optional<String> sortBy);
 }

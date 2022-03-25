@@ -19,8 +19,8 @@ public class PatientController extends CrudController<Patient, Long, PatientServ
     }
 
     @GetMapping("/pageable")
-    public Page<Patient> getPatients(@RequestParam Optional<Integer> page, @RequestParam Optional<String> sortBy){
-        return service.getAllByPagination(page, sortBy);
+    public Page<Patient> getPatients(@RequestParam Optional<Integer> page, @RequestParam Optional<String> value, @RequestParam Optional<String> sortBy){
+        return service.getByPagination(page, value, sortBy);
     }
 
     @GetMapping

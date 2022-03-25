@@ -26,14 +26,23 @@ public class PatientServiceImpl extends PatientService {
     }
 
     @Override
-    public Page<Patient> getAllByPagination(Optional<Integer> page, Optional<String> sortBy) {
-        return repository.findAll(
-                PageRequest.of(
-                        page.orElse(0),
-                        patientPageSize,
-                        Sort.Direction.ASC, sortBy.orElse(patientDefaultSortField)
-                )
+    public Page<Patient> getByPagination(Optional<Integer> page, Optional<String> value, Optional<String> sortBy) {
+
+        PageRequest paginationSetup = PageRequest.of(
+                page.orElse(0),
+                patientPageSize,
+                Sort.Direction.ASC, sortBy.orElse(patientDefaultSortField)
         );
+        if (value.isPresent()){
+            String searchPhrase = value.get();
+            if (searchPhrase.length() == 11)
+                return repository.findPatientsByPeselEquals(Long.valueOf(searchPhrase), paginationSetup);
+            return  repository.findPatientsByPeselGreaterThanEqual(Long.valueOf(searchPhrase + "0".repeat(11 - searchPhrase.length())), paginationSetup);
+        }
+
+
+
+        return repository.findAll(paginationSetup);
     }
 
 }
