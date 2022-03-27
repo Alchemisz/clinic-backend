@@ -1,11 +1,8 @@
 package com.knagmed.clinic.controller;
 
-import com.knagmed.clinic.customRequest.ResponseMessage;
-import com.knagmed.clinic.entity.Patient;
+import com.knagmed.clinic.customRequest.Message;
 import com.knagmed.clinic.service.BasicCrudService;
 import lombok.AllArgsConstructor;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.core.CrudMethods;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,9 +16,9 @@ public class CrudController<T, ID, S extends BasicCrudService<T, ID>> implements
 
     @DeleteMapping("/{id}")
     @Override
-    public ResponseEntity<ResponseMessage> delete(@PathVariable ID id) {
+    public ResponseEntity<Message> delete(@PathVariable ID id) {
         service.deleteById(id);
-        return new ResponseEntity<>(new ResponseMessage("Deleted correctly!"), HttpStatus.OK);
+        return new ResponseEntity<>(new Message("Deleted correctly!"), HttpStatus.OK);
     }
 
     @RequestMapping(method = {RequestMethod.POST, RequestMethod.PUT})

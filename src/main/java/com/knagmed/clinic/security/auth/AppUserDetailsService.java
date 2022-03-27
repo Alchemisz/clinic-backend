@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Repository
 @AllArgsConstructor
-public class AppUserService implements UserDetailsService {
+public class AppUserDetailsService implements UserDetailsService{
 
     private final AppUserRepository appUserRepository;
 
@@ -24,4 +24,5 @@ public class AppUserService implements UserDetailsService {
 
         return user.map(AppUserDetails::new).get();
     }
+
 }

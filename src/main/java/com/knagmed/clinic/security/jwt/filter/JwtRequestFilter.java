@@ -1,10 +1,9 @@
 package com.knagmed.clinic.security.jwt.filter;
 
-import com.knagmed.clinic.security.auth.AppUserService;
+import com.knagmed.clinic.security.auth.AppUserDetailsService;
 import com.knagmed.clinic.security.jwt.JwtUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -21,7 +20,7 @@ import java.io.IOException;
 @AllArgsConstructor
 public class JwtRequestFilter extends OncePerRequestFilter {
 
-    private final AppUserService appUserService;
+    private final AppUserDetailsService appUserService;
     private final JwtUtil jwtUtil;
 
     @Override

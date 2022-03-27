@@ -1,7 +1,6 @@
 package com.knagmed.clinic.security.config;
 
-import com.knagmed.clinic.security.auth.AppUserRole;
-import com.knagmed.clinic.security.auth.AppUserService;
+import com.knagmed.clinic.security.auth.AppUserDetailsService;
 import com.knagmed.clinic.security.jwt.filter.JwtRequestFilter;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -20,7 +19,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    private final AppUserService appUserService;
+    private final AppUserDetailsService appUserService;
     private final JwtRequestFilter jwtRequestFilter;
 
     @Override
