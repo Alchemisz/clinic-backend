@@ -1,8 +1,10 @@
 package com.knagmed.clinic.controller;
 
 import com.knagmed.clinic.entity.Doctor;
+import com.knagmed.clinic.entity.Patient;
 import com.knagmed.clinic.service.doctor.DoctorService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.print.Doc;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/doctor")
@@ -23,6 +26,11 @@ public class DoctorController extends CrudController<Doctor, Long, DoctorService
     @GetMapping("")
     public ResponseEntity<List<Doctor>> getDoctor(){
         return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
+    }
+
+    @GetMapping("/pageable")
+    public Page<Doctor> getPatients(@RequestParam Optional<Integer> page, @RequestParam Optional<String> sortBy){
+        return service.getByPagination(page, sortBy);
     }
 
 }

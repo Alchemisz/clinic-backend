@@ -9,5 +9,6 @@ public interface AbstractCrud<T, ID> {
     ResponseEntity<Message> delete(ID id);
     ResponseEntity<T> save(@RequestBody T t);
     ResponseEntity<T> getById(ID id);
+    ResponseEntity<T> update(T t);
 
 }

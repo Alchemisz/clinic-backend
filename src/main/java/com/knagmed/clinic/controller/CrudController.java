@@ -1,6 +1,7 @@
 package com.knagmed.clinic.controller;
 
 import com.knagmed.clinic.customRequest.Message;
+import com.knagmed.clinic.exception.ApiRequestException;
 import com.knagmed.clinic.service.BasicCrudService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,7 +22,7 @@ public class CrudController<T, ID, S extends BasicCrudService<T, ID>> implements
         return new ResponseEntity<>(new Message("Deleted correctly!"), HttpStatus.OK);
     }
 
-    @RequestMapping(method = {RequestMethod.POST, RequestMethod.PUT})
+    @RequestMapping(method = {RequestMethod.POST})
     @Override
     public ResponseEntity<T> save(@RequestBody T t){
         T save = service.save(t);
@@ -36,5 +37,11 @@ public class CrudController<T, ID, S extends BasicCrudService<T, ID>> implements
         return optGet.map(
                 optionalGet -> new ResponseEntity<>(optionalGet, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
+    }
+
+    @PutMapping
+    @Override
+    public ResponseEntity<T> update(@RequestBody T t) {
+        throw new ApiRequestException("This method is not implemented yet!");
     }
 }

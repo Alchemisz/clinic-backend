@@ -1,0 +1,24 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+    <changeSet id="6" author="Adrian">
+
+        <createTable tableName="VISIT">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true" unique="true"/>
+            </column>
+            <column name="visit_date" type="date"/>
+            <column name="patient_pesel" type="bigint">
+                <constraints nullable="false" foreignKeyName="FK_VISIT_PATIENT" referencedColumnNames="pesel" referencedTableName="patient"/>
+            </column>
+            <column name="doctor_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="FK_VISIT_DOCTOR" referencedColumnNames="id" referencedTableName="doctor"/>
+            </column>
+        </createTable>
+
+    </changeSet>
+
+</databaseChangeLog>
