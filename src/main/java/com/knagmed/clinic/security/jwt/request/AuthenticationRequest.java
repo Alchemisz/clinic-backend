@@ -1,15 +1,9 @@
 package com.knagmed.clinic.security.jwt.request;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class AuthenticationRequest {
-
     private String username;
     private String password;
-
 }

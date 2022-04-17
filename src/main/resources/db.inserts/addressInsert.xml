@@ -1,0 +1,81 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+    <changeSet id="8" author="Adrian">
+
+        <insert tableName="ADDRESS">
+            <column name="id">1</column>
+            <column name="city">Londyn</column>
+            <column name="post_code">26-013</column>
+            <column name="house_number">66A</column>
+        </insert>
+
+        <insert tableName="ADDRESS">
+            <column name="id">2</column>
+            <column name="city">Kielce</column>
+            <column name="post_code">24-023</column>
+            <column name="house_number">6C</column>
+        </insert>
+
+        <insert tableName="ADDRESS">
+            <column name="id">3</column>
+            <column name="city">Kielce</column>
+            <column name="post_code">24-023</column>
+            <column name="house_number">23A</column>
+        </insert>
+
+        <insert tableName="ADDRESS">
+            <column name="id">4</column>
+            <column name="city">Kielce</column>
+            <column name="post_code">24-023</column>
+            <column name="house_number">7B</column>
+        </insert>
+
+        <insert tableName="ADDRESS">
+            <column name="id">5</column>
+            <column name="city">Bronowice</column>
+            <column name="post_code">22-215</column>
+            <column name="house_number">3A</column>
+        </insert>
+
+        <insert tableName="ADDRESS">
+            <column name="id">6</column>
+            <column name="city">Wiksonów</column>
+            <column name="post_code">13-013</column>
+            <column name="house_number">138A</column>
+        </insert>
+
+        <insert tableName="ADDRESS">
+            <column name="id">7</column>
+            <column name="city">Makoszyn</column>
+            <column name="post_code">12-111</column>
+            <column name="house_number">9C</column>
+        </insert>
+
+        <insert tableName="ADDRESS">
+            <column name="id">8</column>
+            <column name="city">Górno</column>
+            <column name="post_code">26-013</column>
+            <column name="house_number">66A</column>
+        </insert>
+
+        <insert tableName="ADDRESS">
+            <column name="id">9</column>
+            <column name="city">Knagów</column>
+            <column name="post_code">06-103</column>
+            <column name="house_number">69D</column>
+        </insert>
+
+        <insert tableName="ADDRESS">
+            <column name="id">10</column>
+            <column name="city">Knagów</column>
+            <column name="post_code">06-103</column>
+            <column name="house_number">1A</column>
+        </insert>
+
+    </changeSet>
+
+</databaseChangeLog>

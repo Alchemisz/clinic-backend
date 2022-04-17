@@ -2,12 +2,10 @@
 <databaseChangeLog
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd
-      http://www.liquibase.org/xml/ns/pro
-      http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd">
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
 
+<!--    TABLES-->
     <include file="db.tables/addressTable.xml"/>
     <include file="db.tables/patientTable.xml"/>
     <include file="db.tables/specializationTable.xml"/>
@@ -15,5 +13,17 @@
     <include file="db.tables/doctorSpecializationTable.xml"/>
     <include file="db.tables/visitTable.xml"/>
     <include file="db.tables/appUserTable.xml"/>
+
+<!--    INSERTS-->
+    <include file="db.inserts/specializationInsert.xml"/>
+    <include file="db.inserts/addressInsert.xml"/>
+    <include file="db.inserts/addressInsertSQL.sql"/>
+    <include file="db.inserts/doctorInsert.xml"/>
+    <include file="db.inserts/doctorSpecializationInsert.xml"/>
+    <include file="db.inserts/patientInsertJSON.json"/>
+    <include file="db.inserts/patientInsertSQL.sql"/>
+    <include file="db.inserts/visitInsertSQL.sql"/>
+
+
 
 </databaseChangeLog>

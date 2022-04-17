@@ -7,8 +7,11 @@
     <changeSet id="2" author="Adrian">
 
         <createTable tableName="SPECIALIZATION">
-            <column name="name" type="varchar(30)">
+            <column name="id" type="bigint" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true" unique="true"/>
+            </column>
+            <column name="name" type="varchar(30)">
+                <constraints nullable="false" unique="true"/>
             </column>
         </createTable>
 

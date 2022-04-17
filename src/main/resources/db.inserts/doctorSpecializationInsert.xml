@@ -1,0 +1,71 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+    <changeSet id="9" author="Adrian">
+
+        <insert tableName="DOCTOR_SPECIALIZATION">
+            <column name="DOCTOR_FK">1</column>
+            <column name="SPECIALIZATION_FK">2</column>
+        </insert>
+
+        <insert tableName="DOCTOR_SPECIALIZATION">
+            <column name="DOCTOR_FK">2</column>
+            <column name="SPECIALIZATION_FK">2</column>
+        </insert>
+
+        <insert tableName="DOCTOR_SPECIALIZATION">
+            <column name="DOCTOR_FK">3</column>
+            <column name="SPECIALIZATION_FK">1</column>
+        </insert>
+
+        <insert tableName="DOCTOR_SPECIALIZATION">
+            <column name="DOCTOR_FK">4</column>
+            <column name="SPECIALIZATION_FK">5</column>
+        </insert>
+
+        <insert tableName="DOCTOR_SPECIALIZATION">
+            <column name="DOCTOR_FK">4</column>
+            <column name="SPECIALIZATION_FK">3</column>
+        </insert>
+
+        <insert tableName="DOCTOR_SPECIALIZATION">
+            <column name="DOCTOR_FK">5</column>
+            <column name="SPECIALIZATION_FK">1</column>
+        </insert>
+
+        <insert tableName="DOCTOR_SPECIALIZATION">
+            <column name="DOCTOR_FK">6</column>
+            <column name="SPECIALIZATION_FK">3</column>
+        </insert>
+
+        <insert tableName="DOCTOR_SPECIALIZATION">
+            <column name="DOCTOR_FK">7</column>
+            <column name="SPECIALIZATION_FK">2</column>
+        </insert>
+
+        <insert tableName="DOCTOR_SPECIALIZATION">
+            <column name="DOCTOR_FK">7</column>
+            <column name="SPECIALIZATION_FK">1</column>
+        </insert>
+
+        <insert tableName="DOCTOR_SPECIALIZATION">
+            <column name="DOCTOR_FK">8</column>
+            <column name="SPECIALIZATION_FK">4</column>
+        </insert>
+
+        <insert tableName="DOCTOR_SPECIALIZATION">
+            <column name="DOCTOR_FK">9</column>
+            <column name="SPECIALIZATION_FK">1</column>
+        </insert>
+
+        <insert tableName="DOCTOR_SPECIALIZATION">
+            <column name="DOCTOR_FK">10</column>
+            <column name="SPECIALIZATION_FK">5</column>
+        </insert>
+
+    </changeSet>
+
+</databaseChangeLog>

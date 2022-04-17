@@ -10,8 +10,8 @@
             <column name="DOCTOR_FK" type="bigint">
                 <constraints nullable="false" foreignKeyName="FK_DOCTOR" referencedTableName="doctor" referencedColumnNames="id"/>
             </column>
-            <column name="SPECIALIZATION_FK" type="varchar(30)">
-                <constraints nullable="false" foreignKeyName="FK_SPECIALIZATION" referencedTableName="specialization" referencedColumnNames="name"/>
+            <column name="SPECIALIZATION_FK" type="bigint">
+                <constraints nullable="false" foreignKeyName="FK_SPECIALIZATION" referencedTableName="specialization" referencedColumnNames="id"/>
             </column>
         </createTable>
 

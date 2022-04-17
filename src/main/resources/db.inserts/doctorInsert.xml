@@ -1,0 +1,81 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+    <changeSet id="9" author="Adrian">
+
+        <insert tableName="DOCTOR">
+            <column name="id">1</column>
+            <column name="address_id">1</column>
+            <column name="first_name">Waldemar</column>
+            <column name="last_name">Knaga</column>
+        </insert>
+
+        <insert tableName="DOCTOR">
+            <column name="id">2</column>
+            <column name="address_id">2</column>
+            <column name="first_name">Bartłomiej</column>
+            <column name="last_name">Zawadzki</column>
+        </insert>
+
+        <insert tableName="DOCTOR">
+            <column name="id">3</column>
+            <column name="address_id">3</column>
+            <column name="first_name">Barbara</column>
+            <column name="last_name">Lek</column>
+        </insert>
+
+        <insert tableName="DOCTOR">
+            <column name="id">4</column>
+            <column name="address_id">4</column>
+            <column name="first_name">Jarosław</column>
+            <column name="last_name">Buk</column>
+        </insert>
+
+        <insert tableName="DOCTOR">
+            <column name="id">5</column>
+            <column name="address_id">5</column>
+            <column name="first_name">Mirosław</column>
+            <column name="last_name">Lamczyk</column>
+        </insert>
+
+        <insert tableName="DOCTOR">
+            <column name="id">6</column>
+            <column name="address_id">6</column>
+            <column name="first_name">Waldemar</column>
+            <column name="last_name">Kikut</column>
+        </insert>
+
+        <insert tableName="DOCTOR">
+            <column name="id">7</column>
+            <column name="address_id">7</column>
+            <column name="first_name">Henryk</column>
+            <column name="last_name">Sawicki</column>
+        </insert>
+
+        <insert tableName="DOCTOR">
+            <column name="id">8</column>
+            <column name="address_id">8</column>
+            <column name="first_name">Jajami</column>
+            <column name="last_name">Omate</column>
+        </insert>
+
+        <insert tableName="DOCTOR">
+            <column name="id">9</column>
+            <column name="address_id">9</column>
+            <column name="first_name">Albert</column>
+            <column name="last_name">Dijkstra</column>
+        </insert>
+
+        <insert tableName="DOCTOR">
+            <column name="id">10</column>
+            <column name="address_id">10</column>
+            <column name="first_name">Szymon</column>
+            <column name="last_name">Stawiarz</column>
+        </insert>
+
+    </changeSet>
+
+</databaseChangeLog>
