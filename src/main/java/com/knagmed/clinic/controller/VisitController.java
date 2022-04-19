@@ -3,16 +3,15 @@
 
 package com.knagmed.clinic.controller;
 
+import com.knagmed.clinic.customRequest.Message;
 import com.knagmed.clinic.customRequest.VisitRequest;
+import com.knagmed.clinic.dto.VisitDTO;
 import com.knagmed.clinic.entity.Visit;
 import com.knagmed.clinic.service.visit.VisitService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PostAuthorize;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -41,6 +40,21 @@ public class VisitController{
     @GetMapping()
     public Page<Visit> getVisitsByDate(@RequestBody LocalDate localDate, @RequestParam Optional<Integer> page){
         return visitService.getByVisitDatePagination(localDate, page);
+    }
+
+    @GetMapping("/upcoming")
+    public Page<VisitDTO> getUpcomingVisits(@RequestParam Optional<Integer> page){
+        return visitService.getUpcomingVisits(page);
+    }
+
+    @GetMapping("/finished")
+    public Page<VisitDTO> getFinishedVisits(@RequestParam Optional<Integer> page){
+        return visitService.getFinishedVisits(page);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        visitService.deleteVisitById(id);
     }
 
 }

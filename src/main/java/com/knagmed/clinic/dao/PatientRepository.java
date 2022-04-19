@@ -14,5 +14,4 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
     Optional<Patient> findPatientByPesel(Long pesel);
     Page<Patient> findPatientsByPeselGreaterThanEqual(Long pesel, Pageable pageable);
     Page<Patient> findPatientsByPeselEquals(Long pesel, Pageable pageable);
-
 }

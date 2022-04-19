@@ -21,8 +21,9 @@ public class Person {
 
     @NotNull
     protected String lastName;
-
-    @ManyToOne(cascade = CascadeType.ALL)
+//
+//    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "address_id")
     private Address address;
 

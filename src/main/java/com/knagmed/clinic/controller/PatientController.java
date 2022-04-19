@@ -1,5 +1,6 @@
 package com.knagmed.clinic.controller;
 
+import com.knagmed.clinic.customRequest.Message;
 import com.knagmed.clinic.entity.Patient;
 import com.knagmed.clinic.service.patient.PatientService;
 import org.springframework.data.domain.Page;
@@ -27,5 +28,11 @@ public class PatientController extends CrudController<Patient, Long, PatientServ
     public ResponseEntity<List<Patient>> getPatients(){
         List<Patient> patients = service.getAll();
         return new ResponseEntity<>(patients, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Message> delete(@PathVariable Long id) {
+        service.deletePatientAndVisitsByPatientPesel(id);
+        return new ResponseEntity<>(new Message("Deleted correctly!"), HttpStatus.OK);
     }
 }

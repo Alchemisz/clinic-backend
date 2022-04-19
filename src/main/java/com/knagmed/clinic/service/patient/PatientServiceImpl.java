@@ -1,6 +1,7 @@
 package com.knagmed.clinic.service.patient;
 
 import com.knagmed.clinic.dao.PatientRepository;
+import com.knagmed.clinic.dao.VisitRepository;
 import com.knagmed.clinic.entity.Patient;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
@@ -8,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -15,14 +17,17 @@ import java.util.Optional;
 @Setter
 public class PatientServiceImpl extends PatientService {
 
+    private final VisitRepository visitRepository;
+
     @Value("${patient.page.size}")
     private Integer patientPageSize;
 
     @Value("${patient.default.sort.field}")
     private String patientDefaultSortField;
 
-    public PatientServiceImpl(PatientRepository repository) {
+    public PatientServiceImpl(PatientRepository repository, VisitRepository visitRepository) {
         super(repository);
+        this.visitRepository = visitRepository;
     }
 
     @Override
@@ -44,5 +49,13 @@ public class PatientServiceImpl extends PatientService {
 
         return repository.findAll(paginationSetup);
     }
+
+    @Transactional
+    @Override
+    public void deletePatientAndVisitsByPatientPesel(Long patientPesel) {
+        visitRepository.deleteAllByPatientPesel(patientPesel);
+        repository.deleteById(patientPesel);
+    }
+
 
 }

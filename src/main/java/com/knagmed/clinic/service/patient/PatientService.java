@@ -14,4 +14,6 @@ public abstract class PatientService extends BasicCrudServiceImpl<Patient, Long,
     }
 
     public abstract Page<Patient> getByPagination(Optional<Integer> page, Optional<String> value, Optional<String> sortBy);
+
+    public abstract void deletePatientAndVisitsByPatientPesel(Long patientPesel);
 }

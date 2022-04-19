@@ -15,12 +15,6 @@ public class CrudController<T, ID, S extends BasicCrudService<T, ID>> implements
 
     protected S service;
 
-    @DeleteMapping("/{id}")
-    @Override
-    public ResponseEntity<Message> delete(@PathVariable ID id) {
-        service.deleteById(id);
-        return new ResponseEntity<>(new Message("Deleted correctly!"), HttpStatus.OK);
-    }
 
     @RequestMapping(method = {RequestMethod.POST})
     @Override
