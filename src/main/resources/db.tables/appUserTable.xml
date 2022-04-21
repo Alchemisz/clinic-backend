@@ -7,8 +7,11 @@
     <changeSet id="7" author="Adrian">
 
         <createTable tableName="APP_USER">
-            <column name="username" type="varchar(20)">
+            <column name="id" type="bigint" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true" unique="true"/>
+            </column>
+            <column name="username" type="varchar(20)">
+                <constraints nullable="false" unique="true"/>
             </column>
             <column name="password" type="varchar(255)">
                 <constraints nullable="false"/>

@@ -1,7 +1,10 @@
 package com.knagmed.clinic.controller;
 
+import com.knagmed.clinic.customRequest.Message;
+import com.knagmed.clinic.dto.DoctorDTO;
 import com.knagmed.clinic.entity.Doctor;
 import com.knagmed.clinic.entity.Patient;
+import com.knagmed.clinic.entity.Specialization;
 import com.knagmed.clinic.service.doctor.DoctorService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -31,6 +34,22 @@ public class DoctorController extends CrudController<Doctor, Long, DoctorService
     @GetMapping("/pageable")
     public Page<Doctor> getPatients(@RequestParam Optional<Integer> page, @RequestParam Optional<String> sortBy){
         return service.getByPagination(page, sortBy);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Message> delete(@PathVariable Long id) {
+        service.deleteDoctorAndVisitsByDoctorId(id);
+        return new ResponseEntity<>(new Message("Deleted correctly!"), HttpStatus.OK);
+    }
+
+    @GetMapping("/specializations")
+    public List<Specialization> getAllSpecializations(){
+        return service.getAllSpecializations();
+    }
+
+    @GetMapping("/all")
+    public List<DoctorDTO> getAllDoctors(){
+        return  service.getAllDoctors();
     }
 
 }

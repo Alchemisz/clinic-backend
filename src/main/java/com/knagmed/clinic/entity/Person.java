@@ -1,13 +1,11 @@
 package com.knagmed.clinic.entity;
 
+import com.knagmed.clinic.security.auth.AppUser;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.CascadeType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Data
@@ -21,8 +19,11 @@ public class Person {
 
     @NotNull
     protected String lastName;
-//
-//    @ManyToOne(cascade = CascadeType.ALL)
+
+    @OneToOne
+    @JoinColumn(name = "userId")
+    protected AppUser appUser;
+
     @ManyToOne
     @JoinColumn(name = "address_id")
     private Address address;

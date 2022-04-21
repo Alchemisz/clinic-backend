@@ -1,5 +1,6 @@
 package com.knagmed.clinic.entity;
 
+import com.knagmed.clinic.security.auth.AppUser;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,8 +16,8 @@ public class Patient extends Person{
     @Column(name = "pesel", unique = true, nullable = false)
     private Long pesel;
 
-    public Patient(Long pesel,@NotNull String firstName,@NotNull String lastName, Address address) {
-        super(firstName, lastName, address);
+    public Patient(@NotNull String firstName, @NotNull String lastName, AppUser appUser, Address address, Long pesel) {
+        super(firstName, lastName, appUser, address);
         this.pesel = pesel;
     }
 }

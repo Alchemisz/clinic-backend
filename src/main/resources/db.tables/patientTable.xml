@@ -15,6 +15,9 @@
             <column name="address_id" type="bigint">
                 <constraints nullable="false" foreignKeyName="FK_PATIENT_ADDRESS" referencedColumnNames="id" referencedTableName="address"/>
             </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="true" foreignKeyName="FK_PATIENT_APP_USER" referencedColumnNames="id" referencedTableName="app_user"/>
+            </column>
         </createTable>
 
     </changeSet>

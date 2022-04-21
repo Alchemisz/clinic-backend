@@ -1,5 +1,6 @@
 package com.knagmed.clinic.entity;
 
+import com.knagmed.clinic.security.auth.AppUser;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -18,15 +19,16 @@ public class Doctor extends Person{
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     @JoinTable(
             name = "DOCTOR_SPECIALIZATION",
             joinColumns = {@JoinColumn(name = "DOCTOR_FK")},
             inverseJoinColumns = {@JoinColumn(name = "SPECIALIZATION_FK")})
     private List<Specialization> specializations;
 
-    public Doctor(@NotNull String firstName, @NotNull String lastName, Address address) {
-        super(firstName, lastName, address);
+    public Doctor(@NotNull String firstName, @NotNull String lastName, AppUser appUser, Address address, List<Specialization> specializations) {
+        super(firstName, lastName, appUser, address);
+        this.specializations = specializations;
     }
 
     public void addSpecialization(Specialization specialization){

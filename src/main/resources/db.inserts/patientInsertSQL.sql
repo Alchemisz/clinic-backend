@@ -19,3 +19,8 @@ VALUES (99143892552, 'Adrian', 'Rubak', 21),
        (89438292132, 'Jakub', 'Ziomek', 23),
        (99310248392, 'Patryk', 'Barnaba', 22),
        (89245872712, 'Daniel', 'Kot', 28);
+
+-- INSERT INTO PATIENT (pesel, first_name, last_name, address_id, user_id)
+-- VALUES (90094328472, 'Adrian', 'Rubak', 21, 1),
+--        (78372183718, 'Karol', 'Ziemba', 22, 2);
+

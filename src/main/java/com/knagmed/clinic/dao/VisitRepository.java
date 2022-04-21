@@ -24,4 +24,8 @@ public interface VisitRepository extends JpaRepository<Visit, Long> {
     @Query(nativeQuery = true, value = "DELETE FROM VISIT v WHERE v.patient_pesel = :pesel")
     void deleteAllByPatientPesel(@Param("pesel") Long pesel);
 
+    @Modifying
+    @Query(nativeQuery = true, value = "DELETE FROM VISIT v WHERE v.doctor_id = :doctorId")
+    void deleteAllByDoctorId(@Param("doctorId") Long doctorId);
+
 }

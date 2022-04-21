@@ -7,12 +7,12 @@
 
 <!--    TABLES-->
     <include file="db.tables/addressTable.xml"/>
+    <include file="db.tables/appUserTable.xml"/>
     <include file="db.tables/patientTable.xml"/>
     <include file="db.tables/specializationTable.xml"/>
     <include file="db.tables/doctorTable.xml"/>
     <include file="db.tables/doctorSpecializationTable.xml"/>
     <include file="db.tables/visitTable.xml"/>
-    <include file="db.tables/appUserTable.xml"/>
 
 <!--    INSERTS-->
     <include file="db.inserts/specializationInsert.xml"/>
