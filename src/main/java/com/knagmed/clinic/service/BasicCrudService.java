@@ -6,7 +6,7 @@ import java.util.Optional;
 public interface BasicCrudService<T, ID> {
 
     T save (T t);
-    Optional<T> getById(ID id);
+    Optional<T> getPatientById(ID id);
     List<T> getAll();
     void deleteById(ID id);
     T update(T t);

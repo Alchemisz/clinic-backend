@@ -1,10 +1,10 @@
 
 
 
-package com.knagmed.clinic.controller;
+package com.knagmed.clinic.client;
 
-import com.knagmed.clinic.customRequest.Message;
 import com.knagmed.clinic.customRequest.VisitRequest;
+import com.knagmed.clinic.client.command.VisitCreateCommand;
 import com.knagmed.clinic.dto.VisitDTO;
 import com.knagmed.clinic.entity.Visit;
 import com.knagmed.clinic.service.visit.VisitService;
@@ -55,6 +55,16 @@ public class VisitController{
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         visitService.deleteVisitById(id);
+    }
+
+    @GetMapping("/upcoming/patient/{pesel}")
+    public List<VisitDTO> getPatientsVisits(@PathVariable Long pesel){
+        return visitService.getVisitsByPatientPesel(pesel);
+    }
+
+    @PostMapping("/add")
+    public void addVisit(@RequestBody VisitCreateCommand command){
+        visitService.addVisit(command);
     }
 
 }

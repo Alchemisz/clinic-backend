@@ -1,5 +1,7 @@
 package com.knagmed.clinic.dao;
 
+import com.knagmed.clinic.dto.VisitDTO;
+import com.knagmed.clinic.entity.Patient;
 import com.knagmed.clinic.entity.Visit;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,6 +12,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Repository
 public interface VisitRepository extends JpaRepository<Visit, Long> {
@@ -28,4 +31,5 @@ public interface VisitRepository extends JpaRepository<Visit, Long> {
     @Query(nativeQuery = true, value = "DELETE FROM VISIT v WHERE v.doctor_id = :doctorId")
     void deleteAllByDoctorId(@Param("doctorId") Long doctorId);
 
+    List<Visit> findVisitByPatient(Patient patient);
 }

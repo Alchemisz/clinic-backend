@@ -1,7 +1,6 @@
-package com.knagmed.clinic.controller;
+package com.knagmed.clinic.client;
 
 import com.knagmed.clinic.customRequest.Message;
-import com.knagmed.clinic.security.auth.AppUserRole;
 import com.knagmed.clinic.service.appUser.AppUserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;

@@ -19,7 +19,7 @@ public class BasicCrudServiceImpl<T, ID, R extends JpaRepository<T, ID>> impleme
     }
 
     @Override
-    public Optional<T> getById(ID id) {
+    public Optional<T> getPatientById(ID id) {
         return repository.findById(id);
     }
 

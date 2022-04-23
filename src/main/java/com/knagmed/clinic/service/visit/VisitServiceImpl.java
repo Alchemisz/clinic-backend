@@ -2,18 +2,19 @@ package com.knagmed.clinic.service.visit;
 
 import com.knagmed.clinic.customRequest.VisitRequest;
 import com.knagmed.clinic.dao.VisitRepository;
+import com.knagmed.clinic.client.command.VisitCreateCommand;
 import com.knagmed.clinic.dto.VisitDTO;
 import com.knagmed.clinic.entity.Doctor;
 import com.knagmed.clinic.entity.Patient;
 import com.knagmed.clinic.entity.Visit;
 import com.knagmed.clinic.service.doctor.DoctorService;
-import com.knagmed.clinic.service.patient.PatientService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -37,8 +38,8 @@ public class VisitServiceImpl extends VisitService {
 
     @Override
     public Visit save(VisitRequest visitRequest) {
-        Optional<Patient> patient = patientService.getById(visitRequest.getPatientId());
-        Optional<Doctor> doctor = doctorService.getById(visitRequest.getDoctorId());
+        Optional<Patient> patient = patientService.getPatientById(visitRequest.getPatientId());
+        Optional<Doctor> doctor = doctorService.getPatientById(visitRequest.getDoctorId());
 
         if (patient.isPresent() && doctor.isPresent()) {
             Visit visit = new Visit(visitRequest.getVisitDate());
@@ -89,6 +90,33 @@ public class VisitServiceImpl extends VisitService {
     @Override
     public void deleteVisitById(Long id) {
         repository.deleteById(id);
+    }
+
+    @Transactional
+    @Override
+    public void addVisit(VisitCreateCommand command) {
+        Patient patient = patientService.getPatientById(command.getPatientPesel())
+                .orElseThrow(() -> new IllegalArgumentException(String.format("Patient with ID=%d not found", command.getPatientPesel())));
+        Doctor doctor = doctorService.getPatientById(command.getDoctorId())
+                .orElseThrow(() -> new IllegalArgumentException(String.format("Patient with ID=%d not found", command.getDoctorId())));
+        Visit visit = new Visit(command.getVisitDate());
+        visit.setPatient(patient);
+        visit.setDoctor(doctor);
+        repository.save(visit);
+    }
+
+    @Override
+    public List<VisitDTO> getVisitsByPatientPesel(Long pesel) {
+        Optional<Patient> byId = patientService.getPatientById(pesel);
+        List<Visit> visitByPatient = repository.findVisitByPatient(byId.get());
+        return visitByPatient.stream()
+                .map(visit -> VisitDTO.builder()
+                        .visitId(visit.getId())
+                        .visitDate(visit.getVisitDate())
+                        .patientData(visit.getPatient().getFirstName() + " " + visit.getPatient().getLastName())
+                        .doctorData(visit.getDoctor().getFirstName() + " " + visit.getDoctor().getLastName())
+                        .build())
+                .collect(Collectors.toList());
     }
 
     private PageImpl<VisitDTO> mapToVisitDTOsPage(Page<Visit> visitPage, Pageable pageable, long totalElements) {
