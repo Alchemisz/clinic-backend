@@ -8,6 +8,7 @@ import com.knagmed.clinic.entity.Doctor;
 import com.knagmed.clinic.entity.Patient;
 import com.knagmed.clinic.entity.Visit;
 import com.knagmed.clinic.service.doctor.DoctorService;
+import com.knagmed.clinic.service.patient.PatientService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -38,13 +39,13 @@ public class VisitServiceImpl extends VisitService {
 
     @Override
     public Visit save(VisitRequest visitRequest) {
-        Optional<Patient> patient = patientService.getPatientById(visitRequest.getPatientId());
+        Patient patient = patientService.getPatientByPesel(visitRequest.getPatientId());
         Optional<Doctor> doctor = doctorService.getPatientById(visitRequest.getDoctorId());
 
-        if (patient.isPresent() && doctor.isPresent()) {
+        if (doctor.isPresent()) {
             Visit visit = new Visit(visitRequest.getVisitDate());
             visit.setDoctor(doctor.get());
-            visit.setPatient(patient.get());
+            visit.setPatient(patient);
             return repository.save(visit);
         }
 
@@ -95,8 +96,7 @@ public class VisitServiceImpl extends VisitService {
     @Transactional
     @Override
     public void addVisit(VisitCreateCommand command) {
-        Patient patient = patientService.getPatientById(command.getPatientPesel())
-                .orElseThrow(() -> new IllegalArgumentException(String.format("Patient with ID=%d not found", command.getPatientPesel())));
+        Patient patient = patientService.getPatientByPesel(command.getPatientPesel());
         Doctor doctor = doctorService.getPatientById(command.getDoctorId())
                 .orElseThrow(() -> new IllegalArgumentException(String.format("Patient with ID=%d not found", command.getDoctorId())));
         Visit visit = new Visit(command.getVisitDate());
@@ -107,8 +107,8 @@ public class VisitServiceImpl extends VisitService {
 
     @Override
     public List<VisitDTO> getVisitsByPatientPesel(Long pesel) {
-        Optional<Patient> byId = patientService.getPatientById(pesel);
-        List<Visit> visitByPatient = repository.findVisitByPatient(byId.get());
+        Patient patient = patientService.getPatientByPesel(pesel);
+        List<Visit> visitByPatient = repository.findVisitByPatient(patient);
         return visitByPatient.stream()
                 .map(visit -> VisitDTO.builder()
                         .visitId(visit.getId())

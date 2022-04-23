@@ -16,7 +16,6 @@ import java.util.Optional;
 @AllArgsConstructor
 public class PatientController {
 
-    private final PatientService patientService;
     private final PatientFacade patientFacade;
 
     @GetMapping("/pageable")
