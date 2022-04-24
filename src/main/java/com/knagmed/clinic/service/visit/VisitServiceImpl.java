@@ -64,28 +64,28 @@ public class VisitServiceImpl extends VisitService {
 
     @Override
     public Page<VisitDTO> getUpcomingVisits(Optional<Integer> page) {
-        Page<Visit> visitPage = repository.findByVisitDateIsGreaterThanEqual(
+        Page<Visit> visitPage = repository.findByVisitDateIsGreaterThanEqualAndEndedEquals(
                 LocalDate.now(),
+                false,
                 PageRequest.of(
                         page.orElse(0),
                         visitPageSize
                 )
         );
-        PageImpl<VisitDTO> visitDTOS = mapToVisitDTOsPage(visitPage, visitPage.getPageable(), visitPage.getTotalElements());
-        return visitDTOS;
+        return mapToVisitDTOsPage(visitPage, visitPage.getPageable(), visitPage.getTotalElements());
     }
 
     @Override
     public Page<VisitDTO> getFinishedVisits(Optional<Integer> page) {
-        Page<Visit> visitPage = repository.findByVisitDateLessThan(
+        Page<Visit> visitPage = repository.findByVisitDateLessThanOrEnded(
                 LocalDate.now(),
+                true,
                 PageRequest.of(
                         page.orElse(0),
                         visitPageSize
                 )
         );
-        PageImpl<VisitDTO> visitDTOS = mapToVisitDTOsPage(visitPage, visitPage.getPageable(), visitPage.getTotalElements());
-        return visitDTOS;
+        return mapToVisitDTOsPage(visitPage, visitPage.getPageable(), visitPage.getTotalElements());
     }
 
     @Override
@@ -107,8 +107,7 @@ public class VisitServiceImpl extends VisitService {
 
     @Override
     public List<VisitDTO> getVisitsByPatientPesel(Long pesel) {
-        Patient patient = patientService.getPatientByPesel(pesel);
-        List<Visit> visitByPatient = repository.findVisitByPatient(patient);
+        List<Visit> visitByPatient = repository.findVisitByEndedIsFalseAndPatientEquals(pesel);
         return visitByPatient.stream()
                 .map(visit -> VisitDTO.builder()
                         .visitId(visit.getId())
@@ -117,6 +116,11 @@ public class VisitServiceImpl extends VisitService {
                         .doctorData(visit.getDoctor().getFirstName() + " " + visit.getDoctor().getLastName())
                         .build())
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void setEnded(Long id) {
+        repository.setEndedById(id);
     }
 
     private PageImpl<VisitDTO> mapToVisitDTOsPage(Page<Visit> visitPage, Pageable pageable, long totalElements) {

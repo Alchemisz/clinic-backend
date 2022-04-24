@@ -11,6 +11,9 @@
                 <constraints nullable="false" primaryKey="true" unique="true"/>
             </column>
             <column name="visit_date" type="date"/>
+            <column name="is_ended" type="bool">
+                <constraints nullable="false"/>
+            </column>
             <column name="patient_pesel" type="bigint">
                 <constraints nullable="false" foreignKeyName="FK_VISIT_PATIENT" referencedColumnNames="pesel" referencedTableName="patient"/>
             </column>

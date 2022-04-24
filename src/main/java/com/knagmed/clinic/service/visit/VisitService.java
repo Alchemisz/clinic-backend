@@ -31,4 +31,6 @@ public abstract class VisitService extends BasicCrudServiceImpl<Visit, Long, Vis
     public abstract void addVisit(VisitCreateCommand command);
 
     public abstract List<VisitDTO> getVisitsByPatientPesel(Long pesel);
+
+    public abstract void setEnded(Long id);
 }

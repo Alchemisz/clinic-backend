@@ -57,6 +57,11 @@ public class VisitController{
         visitService.deleteVisitById(id);
     }
 
+    @PatchMapping("/end/{id}")
+    public void setEnded(@PathVariable Long id) {
+        visitService.setEnded(id);
+    }
+
     @GetMapping("/upcoming/patient/{pesel}")
     public List<VisitDTO> getPatientsVisits(@PathVariable Long pesel){
         return visitService.getVisitsByPatientPesel(pesel);

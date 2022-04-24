@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -19,9 +20,11 @@ public interface VisitRepository extends JpaRepository<Visit, Long> {
 
     Page<Visit> findByVisitDate(LocalDate date, Pageable pageable);
 
-    Page<Visit> findByVisitDateIsGreaterThanEqual(LocalDate date, Pageable pageable);
+    @Query(value = "SELECT v FROM Visit v WHERE v.visitDate >= :date AND v.isEnded = :ended  ")
+    Page<Visit> findByVisitDateIsGreaterThanEqualAndEndedEquals(@Param("date") LocalDate date, @Param("ended") Boolean ended, Pageable pageable);
 
-    Page<Visit> findByVisitDateLessThan(LocalDate date, Pageable pageable);
+    @Query(value = "SELECT v FROM Visit v WHERE v.visitDate < :date OR v.isEnded = :ended  ")
+    Page<Visit> findByVisitDateLessThanOrEnded(@Param("date") LocalDate date, @Param("ended") Boolean ended, Pageable pageable);
 
     @Modifying
     @Query(nativeQuery = true, value = "DELETE FROM VISIT v WHERE v.patient_pesel = :pesel")
@@ -31,5 +34,13 @@ public interface VisitRepository extends JpaRepository<Visit, Long> {
     @Query(nativeQuery = true, value = "DELETE FROM VISIT v WHERE v.doctor_id = :doctorId")
     void deleteAllByDoctorId(@Param("doctorId") Long doctorId);
 
-    List<Visit> findVisitByPatient(Patient patient);
+    @Transactional
+    @Modifying
+    @Query(value = "UPDATE Visit v set v.isEnded = true where v.id = :visitId")
+    void setEndedById(@Param("visitId") Long visitId);
+
+//    List<Visit> findVisitByPatientEqualsAndEndedIsFalse(Patient patient);
+
+    @Query(value = "SELECT v FROM Visit v WHERE v.patient.pesel = :patientPesel AND v.isEnded = false")
+    List<Visit> findVisitByEndedIsFalseAndPatientEquals(@Param("patientPesel") Long patientPesel);
 }

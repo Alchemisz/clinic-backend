@@ -35,6 +35,8 @@ public class Visit {
     @JoinColumn(name = "doctor_id")
     private Doctor doctor;
 
+    private boolean isEnded;
+
     public Visit(LocalDate visitDate) {
         this.visitDate = visitDate;
     }
