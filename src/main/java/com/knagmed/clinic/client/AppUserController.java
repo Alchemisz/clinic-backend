@@ -1,6 +1,7 @@
 package com.knagmed.clinic.client;
 
 import com.knagmed.clinic.customRequest.Message;
+import com.knagmed.clinic.service.appUser.AppUserFacade;
 import com.knagmed.clinic.service.appUser.AppUserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,7 @@ import java.util.Collection;
 public class AppUserController {
 
     private final AppUserService appUserService;
+    private final AppUserFacade appUserFacade;
 
     @PostMapping("/exists")
     public ResponseEntity<Message> isUserExists(@RequestBody Message requestMessage){
