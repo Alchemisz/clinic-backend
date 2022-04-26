@@ -1,6 +1,5 @@
 package com.knagmed.clinic.service.visit;
 
-import com.knagmed.clinic.customRequest.VisitRequest;
 import com.knagmed.clinic.dao.VisitRepository;
 import com.knagmed.clinic.client.command.VisitCreateCommand;
 import com.knagmed.clinic.dto.VisitDTO;
@@ -35,21 +34,6 @@ public class VisitServiceImpl extends VisitService {
         super(repository);
         this.patientService = patientService;
         this.doctorService = doctorService;
-    }
-
-    @Override
-    public Visit save(VisitRequest visitRequest) {
-        Patient patient = patientService.getPatientByPesel(visitRequest.getPatientId());
-        Optional<Doctor> doctor = doctorService.getPatientById(visitRequest.getDoctorId());
-
-        if (doctor.isPresent()) {
-            Visit visit = new Visit(visitRequest.getVisitDate());
-            visit.setDoctor(doctor.get());
-            visit.setPatient(patient);
-            return repository.save(visit);
-        }
-
-        return null;
     }
 
     @Override
@@ -97,8 +81,7 @@ public class VisitServiceImpl extends VisitService {
     @Override
     public void addVisit(VisitCreateCommand command) {
         Patient patient = patientService.getPatientByPesel(command.getPatientPesel());
-        Doctor doctor = doctorService.getPatientById(command.getDoctorId())
-                .orElseThrow(() -> new IllegalArgumentException(String.format("Patient with ID=%d not found", command.getDoctorId())));
+        Doctor doctor = doctorService.getDoctorById(command.getDoctorId());
         Visit visit = new Visit(command.getVisitDate());
         visit.setPatient(patient);
         visit.setDoctor(doctor);

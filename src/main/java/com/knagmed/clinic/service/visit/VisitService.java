@@ -1,6 +1,5 @@
 package com.knagmed.clinic.service.visit;
 
-import com.knagmed.clinic.customRequest.VisitRequest;
 import com.knagmed.clinic.dao.VisitRepository;
 import com.knagmed.clinic.client.command.VisitCreateCommand;
 import com.knagmed.clinic.dto.VisitDTO;
@@ -17,8 +16,6 @@ public abstract class VisitService extends BasicCrudServiceImpl<Visit, Long, Vis
     public VisitService(VisitRepository repository) {
         super(repository);
     }
-
-    public abstract Visit save(VisitRequest visitRequest);
 
     public abstract Page<Visit> getByVisitDatePagination(LocalDate localDate, Optional<Integer> page);
 

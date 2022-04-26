@@ -2,15 +2,15 @@ package com.knagmed.clinic.service.appUser;
 
 import com.knagmed.clinic.security.auth.AppUserRepository;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Service
-public class AppUserServiceImpl implements AppUserService {
+public class AppUserQueryService {
 
     private AppUserRepository appUserRepository;
 
-    @Override
     public Boolean isUserExists(String username) {
         return appUserRepository.existsByUsername(username);
     }

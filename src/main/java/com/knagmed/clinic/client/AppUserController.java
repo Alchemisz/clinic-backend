@@ -1,14 +1,11 @@
 package com.knagmed.clinic.client;
 
 import com.knagmed.clinic.customRequest.Message;
-import com.knagmed.clinic.service.appUser.AppUserFacade;
-import com.knagmed.clinic.service.appUser.AppUserService;
+import com.knagmed.clinic.service.appUser.AppUserQueryFacade;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -18,18 +15,17 @@ import java.util.Collection;
 @AllArgsConstructor
 public class AppUserController {
 
-    private final AppUserService appUserService;
-    private final AppUserFacade appUserFacade;
+    private final AppUserQueryFacade appUserQueryFacade;
 
     @PostMapping("/exists")
     public ResponseEntity<Message> isUserExists(@RequestBody Message requestMessage){
-        Boolean userExists = appUserService.isUserExists(requestMessage.getMessage());
-        return new ResponseEntity<>(new Message(userExists.toString()), userExists ? HttpStatus.FOUND : HttpStatus.NOT_FOUND);
+        Boolean userExists = appUserQueryFacade.isUserExists(requestMessage.getMessage());
+        return new ResponseEntity<>(new Message(userExists.toString()), Boolean.TRUE.equals(userExists) ? HttpStatus.FOUND : HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/roles")
     public Collection<? extends GrantedAuthority> getUserRole(){
-        return ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getAuthorities();
+        return appUserQueryFacade.getLoggedUserRoles();
     }
 
 }

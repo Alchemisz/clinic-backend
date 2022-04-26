@@ -32,20 +32,13 @@ public class DoctorController{
 
     @GetMapping("/{id}")
     public ResponseEntity<Doctor> getById(@PathVariable Long id){
-        Optional<Doctor> optGet = doctorService.getPatientById(id);
-        return optGet.map(
-                        optionalGet -> new ResponseEntity<>(optionalGet, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
+        Doctor doctor = doctorService.getDoctorById(id);
+        return new ResponseEntity<>(doctor, HttpStatus.OK);
     }
 
     @PutMapping
     public ResponseEntity<Doctor> update(@RequestBody Doctor t) {
         throw new ApiRequestException("This method is not implemented yet!");
-    }
-
-    @GetMapping("")
-    public ResponseEntity<List<Doctor>> getDoctor(){
-        return new ResponseEntity<>(doctorService.getAll(), HttpStatus.OK);
     }
 
     @GetMapping("/pageable")

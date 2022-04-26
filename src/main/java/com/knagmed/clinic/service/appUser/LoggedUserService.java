@@ -3,9 +3,12 @@ package com.knagmed.clinic.service.appUser;
 import com.knagmed.clinic.security.auth.AppUser;
 import com.knagmed.clinic.security.auth.AppUserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+
+import java.util.Collection;
 
 @Service
 @RequiredArgsConstructor
@@ -20,5 +23,12 @@ public class LoggedUserService {
                 .orElseThrow(() -> new IllegalStateException("Can not find current logged user!"));
     }
 
+    public UserDetails getCurrentLoggedUserDetails(){
+        return (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    }
+
+    public Collection<? extends GrantedAuthority> getCurrentLoggedUserRoles(){
+        return ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getAuthorities();
+    }
 
 }

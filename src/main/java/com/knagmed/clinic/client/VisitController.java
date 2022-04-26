@@ -3,7 +3,6 @@
 
 package com.knagmed.clinic.client;
 
-import com.knagmed.clinic.customRequest.VisitRequest;
 import com.knagmed.clinic.client.command.VisitCreateCommand;
 import com.knagmed.clinic.dto.VisitDTO;
 import com.knagmed.clinic.entity.Visit;
@@ -24,12 +23,6 @@ import java.util.Optional;
 public class VisitController{
 
     private final VisitService visitService;
-
-    @PostMapping
-    public ResponseEntity<Visit> addVisit(@RequestBody VisitRequest visitRequest){
-        Visit save = visitService.save(visitRequest);
-        return new ResponseEntity<>(save, HttpStatus.CREATED);
-    }
 
     @GetMapping("/all")
     public ResponseEntity<List<Visit>> getVisits(){
