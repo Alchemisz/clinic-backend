@@ -1,0 +1,167 @@
+{
+  "databaseChangeLog": [
+    {
+      "changeSet": {
+        "id": "insert-patient",
+        "author": "adrian",
+        "changes": [
+          {
+            "insert": {
+              "tableName": "PATIENT",
+              "columns": [
+                {
+                  "column": {
+                    "name": "pesel",
+                    "value": 99221205342
+                  }
+                },
+                {
+                  "column": {
+                    "name": "first_name",
+                    "value": "Adrian"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "last_name",
+                    "value": "Bobierz"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "address_id",
+                    "value": 1
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "insert": {
+              "tableName": "PATIENT",
+              "columns": [
+                {
+                  "column": {
+                    "name": "pesel",
+                    "value": 97231255321
+                  }
+                },
+                {
+                  "column": {
+                    "name": "first_name",
+                    "value": "Magdalena"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "last_name",
+                    "value": "Sopla"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "address_id",
+                    "value": 2
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "insert": {
+              "tableName": "PATIENT",
+              "columns": [
+                {
+                  "column": {
+                    "name": "pesel",
+                    "value": 87432278344
+                  }
+                },
+                {
+                  "column": {
+                    "name": "first_name",
+                    "value": "Jarosława"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "last_name",
+                    "value": "Lipa"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "address_id",
+                    "value": 3
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "insert": {
+              "tableName": "PATIENT",
+              "columns": [
+                {
+                  "column": {
+                    "name": "pesel",
+                    "value": 63362454876
+                  }
+                },
+                {
+                  "column": {
+                    "name": "first_name",
+                    "value": "Marianna"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "last_name",
+                    "value": "Hydraszkiewicz"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "address_id",
+                    "value": 4
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "insert": {
+              "tableName": "PATIENT",
+              "columns": [
+                {
+                  "column": {
+                    "name": "pesel",
+                    "value": 43667235123
+                  }
+                },
+                {
+                  "column": {
+                    "name": "first_name",
+                    "value": "Bogusław"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "last_name",
+                    "value": "Kracz"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "address_id",
+                    "value": 5
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

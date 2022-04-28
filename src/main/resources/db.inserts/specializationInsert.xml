@@ -1,0 +1,36 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+    <changeSet id="8" author="Adrian">
+
+        <insert tableName="SPECIALIZATION">
+            <column name="id">1</column>
+            <column name="name">Urolog</column>
+        </insert>
+
+        <insert tableName="SPECIALIZATION">
+            <column name="id">2</column>
+            <column name="name">Kardiolog</column>
+        </insert>
+
+        <insert tableName="SPECIALIZATION">
+            <column name="id">3</column>
+            <column name="name">Stomatolog</column>
+        </insert>
+
+        <insert tableName="SPECIALIZATION">
+            <column name="id">4</column>
+            <column name="name">Farmakolog</column>
+        </insert>
+
+        <insert tableName="SPECIALIZATION">
+            <column name="id">5</column>
+            <column name="name">Epidemiolog</column>
+        </insert>
+
+    </changeSet>
+
+</databaseChangeLog>

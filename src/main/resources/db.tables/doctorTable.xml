@@ -1,0 +1,25 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+    <changeSet id="4" author="Adrian">
+
+        <createTable tableName="DOCTOR">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true" unique="true"/>
+            </column>
+            <column name="first_name" type="varchar(255)"/>
+            <column name="last_name" type="varchar(255)"/>
+            <column name="address_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="FK_DOCTOR_ADDRESS" referencedColumnNames="id" referencedTableName="address"/>
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="true" foreignKeyName="FK_DOCTOR_APP_USER" referencedColumnNames="id" referencedTableName="app_user"/>
+            </column>
+        </createTable>
+
+    </changeSet>
+
+</databaseChangeLog>
