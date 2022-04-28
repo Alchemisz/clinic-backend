@@ -1,6 +1,5 @@
 package com.knagmed.clinic.doctor.client;
 
-import com.knagmed.clinic.customRequest.Message;
 import com.knagmed.clinic.doctor.DoctorService;
 import com.knagmed.clinic.doctor.dto.DoctorDTO;
 import com.knagmed.clinic.entity.Doctor;
@@ -8,7 +7,6 @@ import com.knagmed.clinic.entity.Specialization;
 import com.knagmed.clinic.exception.ApiRequestException;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,17 +21,14 @@ public class DoctorController{
 
     private final DoctorService doctorService;
 
-    @RequestMapping(method = {RequestMethod.POST})
-    public ResponseEntity<Doctor> save(@RequestBody Doctor t){
-        Doctor save = doctorService.save(t);
-        HttpStatus responseCode = save == null ? HttpStatus.BAD_REQUEST : HttpStatus.CREATED;
-        return new ResponseEntity<>(save, responseCode);
+    @PostMapping
+    public Doctor save(@RequestBody Doctor t){
+        return doctorService.save(t);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Doctor> getById(@PathVariable Long id){
-        Doctor doctor = doctorService.getDoctorById(id);
-        return new ResponseEntity<>(doctor, HttpStatus.OK);
+    public Doctor getById(@PathVariable Long id){
+        return doctorService.getDoctorById(id);
     }
 
     @PutMapping
@@ -47,9 +42,8 @@ public class DoctorController{
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Message> delete(@PathVariable Long id) {
+    public void delete(@PathVariable Long id) {
         doctorService.deleteDoctorAndVisitsByDoctorId(id);
-        return new ResponseEntity<>(new Message("Deleted correctly!"), HttpStatus.OK);
     }
 
     @GetMapping("/specializations")

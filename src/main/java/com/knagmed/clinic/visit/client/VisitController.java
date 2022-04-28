@@ -1,6 +1,3 @@
-
-
-
 package com.knagmed.clinic.visit.client;
 
 import com.knagmed.clinic.visit.command.VisitCreateCommand;
@@ -9,8 +6,6 @@ import com.knagmed.clinic.entity.Visit;
 import com.knagmed.clinic.visit.VisitService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -25,9 +20,8 @@ public class VisitController{
     private final VisitService visitService;
 
     @GetMapping("/all")
-    public ResponseEntity<List<Visit>> getVisits(){
-        List<Visit> all = visitService.getAll();
-        return new ResponseEntity<>(all, HttpStatus.OK);
+    public List<Visit> getVisits(){
+        return visitService.getAll();
     }
 
     @GetMapping()
