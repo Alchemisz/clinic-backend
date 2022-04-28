@@ -1,11 +1,11 @@
-package com.knagmed.clinic.client;
+package com.knagmed.clinic.doctor.client;
 
 import com.knagmed.clinic.customRequest.Message;
-import com.knagmed.clinic.dto.DoctorDTO;
+import com.knagmed.clinic.doctor.DoctorService;
+import com.knagmed.clinic.doctor.dto.DoctorDTO;
 import com.knagmed.clinic.entity.Doctor;
 import com.knagmed.clinic.entity.Specialization;
 import com.knagmed.clinic.exception.ApiRequestException;
-import com.knagmed.clinic.service.doctor.DoctorService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;

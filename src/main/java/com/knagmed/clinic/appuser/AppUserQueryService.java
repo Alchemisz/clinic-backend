@@ -1,4 +1,4 @@
-package com.knagmed.clinic.service.appUser;
+package com.knagmed.clinic.appuser;
 
 import com.knagmed.clinic.security.auth.AppUserRepository;
 import lombok.AllArgsConstructor;

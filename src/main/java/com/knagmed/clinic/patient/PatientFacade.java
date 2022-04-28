@@ -1,4 +1,4 @@
-package com.knagmed.clinic.service.patient;
+package com.knagmed.clinic.patient;
 
 import com.knagmed.clinic.entity.Patient;
 import lombok.AllArgsConstructor;

@@ -1,13 +1,14 @@
-package com.knagmed.clinic.service.visit;
+package com.knagmed.clinic.visit;
 
-import com.knagmed.clinic.dao.VisitRepository;
-import com.knagmed.clinic.client.command.VisitCreateCommand;
-import com.knagmed.clinic.dto.VisitDTO;
+import com.knagmed.clinic.visit.dao.VisitRepository;
+import com.knagmed.clinic.visit.command.VisitCreateCommand;
+import com.knagmed.clinic.doctor.DoctorService;
+import com.knagmed.clinic.visit.dto.VisitDTO;
 import com.knagmed.clinic.entity.Doctor;
 import com.knagmed.clinic.entity.Patient;
 import com.knagmed.clinic.entity.Visit;
-import com.knagmed.clinic.service.doctor.DoctorService;
-import com.knagmed.clinic.service.patient.PatientService;
+import com.knagmed.clinic.patient.PatientService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -22,23 +23,18 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class VisitServiceImpl extends VisitService {
+@RequiredArgsConstructor
+public class VisitService{
 
+    private final VisitRepository visitRepository;
     private final PatientService patientService;
     private final DoctorService doctorService;
 
     @Value("${visit.page.size}")
     private Integer visitPageSize;
 
-    public VisitServiceImpl(VisitRepository repository, PatientService patientService, DoctorService doctorService) {
-        super(repository);
-        this.patientService = patientService;
-        this.doctorService = doctorService;
-    }
-
-    @Override
     public Page<Visit> getByVisitDatePagination(LocalDate localDate, Optional<Integer> page) {
-        return repository.findByVisitDate(
+        return visitRepository.findByVisitDate(
                 localDate,
                 PageRequest.of(
                         page.orElse(0),
@@ -46,9 +42,8 @@ public class VisitServiceImpl extends VisitService {
                 ));
     }
 
-    @Override
     public Page<VisitDTO> getUpcomingVisits(Optional<Integer> page) {
-        Page<Visit> visitPage = repository.findByVisitDateIsGreaterThanEqualAndEndedEquals(
+        Page<Visit> visitPage = visitRepository.findByVisitDateIsGreaterThanEqualAndEndedEquals(
                 LocalDate.now(),
                 false,
                 PageRequest.of(
@@ -59,9 +54,8 @@ public class VisitServiceImpl extends VisitService {
         return mapToVisitDTOsPage(visitPage, visitPage.getPageable(), visitPage.getTotalElements());
     }
 
-    @Override
     public Page<VisitDTO> getFinishedVisits(Optional<Integer> page) {
-        Page<Visit> visitPage = repository.findByVisitDateLessThanOrEnded(
+        Page<Visit> visitPage = visitRepository.findByVisitDateLessThanOrEnded(
                 LocalDate.now(),
                 true,
                 PageRequest.of(
@@ -72,25 +66,26 @@ public class VisitServiceImpl extends VisitService {
         return mapToVisitDTOsPage(visitPage, visitPage.getPageable(), visitPage.getTotalElements());
     }
 
-    @Override
     public void deleteVisitById(Long id) {
-        repository.deleteById(id);
+        visitRepository.deleteById(id);
+    }
+
+    public List<Visit> getAll() {
+        return visitRepository.findAll();
     }
 
     @Transactional
-    @Override
     public void addVisit(VisitCreateCommand command) {
         Patient patient = patientService.getPatientByPesel(command.getPatientPesel());
         Doctor doctor = doctorService.getDoctorById(command.getDoctorId());
         Visit visit = new Visit(command.getVisitDate());
         visit.setPatient(patient);
         visit.setDoctor(doctor);
-        repository.save(visit);
+        visitRepository.save(visit);
     }
 
-    @Override
     public List<VisitDTO> getVisitsByPatientPesel(Long pesel) {
-        List<Visit> visitByPatient = repository.findVisitByEndedIsFalseAndPatientEquals(pesel);
+        List<Visit> visitByPatient = visitRepository.findVisitByEndedIsFalseAndPatientEquals(pesel);
         return visitByPatient.stream()
                 .map(visit -> VisitDTO.builder()
                         .visitId(visit.getId())
@@ -101,9 +96,8 @@ public class VisitServiceImpl extends VisitService {
                 .collect(Collectors.toList());
     }
 
-    @Override
     public void setEnded(Long id) {
-        repository.setEndedById(id);
+        visitRepository.setEndedById(id);
     }
 
     private PageImpl<VisitDTO> mapToVisitDTOsPage(Page<Visit> visitPage, Pageable pageable, long totalElements) {
@@ -116,7 +110,6 @@ public class VisitServiceImpl extends VisitService {
                         .doctorData(visit.getDoctor().getFirstName() + " " + visit.getDoctor().getLastName())
                         .build())
                 .collect(Collectors.toList());
-        PageImpl<VisitDTO> visitDTOS = new PageImpl<>(visitDTOList, pageable, totalElements);
-        return visitDTOS;
+        return new PageImpl<>(visitDTOList, pageable, totalElements);
     }
 }

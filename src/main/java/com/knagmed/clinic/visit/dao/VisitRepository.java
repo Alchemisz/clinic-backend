@@ -1,7 +1,5 @@
-package com.knagmed.clinic.dao;
+package com.knagmed.clinic.visit.dao;
 
-import com.knagmed.clinic.dto.VisitDTO;
-import com.knagmed.clinic.entity.Patient;
 import com.knagmed.clinic.entity.Visit;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

@@ -1,4 +1,4 @@
-package com.knagmed.clinic.client.command;
+package com.knagmed.clinic.visit.command;
 
 import lombok.*;
 

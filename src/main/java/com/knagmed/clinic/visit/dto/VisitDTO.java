@@ -1,4 +1,4 @@
-package com.knagmed.clinic.dto;
+package com.knagmed.clinic.visit.dto;
 
 import lombok.Builder;
 import lombok.Value;

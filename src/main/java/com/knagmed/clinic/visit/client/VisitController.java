@@ -1,12 +1,12 @@
 
 
 
-package com.knagmed.clinic.client;
+package com.knagmed.clinic.visit.client;
 
-import com.knagmed.clinic.client.command.VisitCreateCommand;
-import com.knagmed.clinic.dto.VisitDTO;
+import com.knagmed.clinic.visit.command.VisitCreateCommand;
+import com.knagmed.clinic.visit.dto.VisitDTO;
 import com.knagmed.clinic.entity.Visit;
-import com.knagmed.clinic.service.visit.VisitService;
+import com.knagmed.clinic.visit.VisitService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;

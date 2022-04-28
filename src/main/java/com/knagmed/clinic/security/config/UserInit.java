@@ -1,8 +1,6 @@
 package com.knagmed.clinic.security.config;
 
-import com.knagmed.clinic.dao.PatientRepository;
-import com.knagmed.clinic.entity.Address;
-import com.knagmed.clinic.entity.Patient;
+import com.knagmed.clinic.patient.dao.PatientRepository;
 import com.knagmed.clinic.security.auth.AppUser;
 import com.knagmed.clinic.security.auth.AppUserRepository;
 import com.knagmed.clinic.security.auth.AppUserRole;

@@ -1,7 +1,7 @@
-package com.knagmed.clinic.client;
+package com.knagmed.clinic.appuser.client;
 
 import com.knagmed.clinic.customRequest.Message;
-import com.knagmed.clinic.service.appUser.AppUserQueryFacade;
+import com.knagmed.clinic.appuser.AppUserQueryFacade;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

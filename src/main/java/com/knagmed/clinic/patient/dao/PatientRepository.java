@@ -1,4 +1,4 @@
-package com.knagmed.clinic.dao;
+package com.knagmed.clinic.patient.dao;
 
 import com.knagmed.clinic.entity.Patient;
 import com.knagmed.clinic.security.auth.AppUser;
@@ -16,7 +16,6 @@ import java.util.Optional;
 @Repository
 public interface PatientRepository extends JpaRepository<Patient, Long> {
 
-    Optional<Patient> findPatientByPesel(Long pesel);
     Page<Patient> findPatientsByPeselGreaterThanEqual(Long pesel, Pageable pageable);
     Page<Patient> findPatientsByPeselEquals(Long pesel, Pageable pageable);
 
@@ -27,9 +26,4 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
     @Query(nativeQuery = true, value = "UPDATE PATIENT p SET p.user_id =:userId WHERE p.pesel =:patientPesel")
     void assignUserToPatient(@Param("patientPesel") Long patientPesel, @Param("userId") Long userId);
 
-//    @Transactional
-//    @Modifying
-//    @Query(value = "update  PATIENT p set p.user_id = ? where p.pesel = ?",
-//            nativeQuery = true)
-//    void updateUserSetStatusForNameNative(Long user_id, Long pesel);
 }

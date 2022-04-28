@@ -1,10 +1,10 @@
-package com.knagmed.clinic.service.patient;
+package com.knagmed.clinic.patient;
 
-import com.knagmed.clinic.dao.PatientRepository;
-import com.knagmed.clinic.dao.VisitRepository;
+import com.knagmed.clinic.patient.dao.PatientRepository;
+import com.knagmed.clinic.visit.dao.VisitRepository;
 import com.knagmed.clinic.entity.Patient;
 import com.knagmed.clinic.security.auth.AppUser;
-import com.knagmed.clinic.service.appUser.LoggedUserService;
+import com.knagmed.clinic.appuser.LoggedUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Supplier;
 
 @Service
 @RequiredArgsConstructor

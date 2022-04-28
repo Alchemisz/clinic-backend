@@ -1,8 +1,8 @@
-package com.knagmed.clinic.client;
+package com.knagmed.clinic.patient.client;
 
 import com.knagmed.clinic.entity.Patient;
 import com.knagmed.clinic.exception.ApiRequestException;
-import com.knagmed.clinic.service.patient.PatientFacade;
+import com.knagmed.clinic.patient.PatientFacade;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;

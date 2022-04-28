@@ -1,4 +1,4 @@
-package com.knagmed.clinic.service.appUser;
+package com.knagmed.clinic.appuser;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
