@@ -1,6 +1,5 @@
 package com.knagmed.clinic.security.auth;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

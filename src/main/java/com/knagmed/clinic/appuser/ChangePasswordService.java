@@ -3,7 +3,6 @@ package com.knagmed.clinic.appuser;
 import com.knagmed.clinic.appuser.command.PasswordChangeCommand;
 import com.knagmed.clinic.appuser.exceptions.AppUserNotFoundException;
 import com.knagmed.clinic.appuser.exceptions.PasswordAreDifferentException;
-import com.knagmed.clinic.security.auth.AppUser;
 import com.knagmed.clinic.security.auth.AppUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
