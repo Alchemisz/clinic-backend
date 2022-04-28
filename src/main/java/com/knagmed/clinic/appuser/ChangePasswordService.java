@@ -16,7 +16,7 @@ public class ChangePasswordService {
   private final AppUserRepository appUserRepository;
 
   public void changePasswordForUser(Long appUserId, PasswordChangeCommand command) {
-    String userPassword = appUserRepository.findById(String.valueOf(appUserId))
+    String userPassword = appUserRepository.findById(appUserId)
         .orElseThrow(() -> new AppUserNotFoundException(String.format("AppUser with ID = %d not found", appUserId)))
         .getPassword();
     if (isAppUserPasswordSameAs(userPassword, command.getOldPassword())){

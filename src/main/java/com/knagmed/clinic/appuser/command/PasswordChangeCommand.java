@@ -1,8 +1,10 @@
 package com.knagmed.clinic.appuser.command;
 
-import lombok.Value;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Value
+@Data
+@NoArgsConstructor
 public class PasswordChangeCommand {
   String oldPassword;
   String newPassword;
