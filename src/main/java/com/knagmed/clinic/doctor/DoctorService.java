@@ -1,7 +1,10 @@
 package com.knagmed.clinic.doctor;
 
+import com.knagmed.clinic.common.AddressRepository;
+import com.knagmed.clinic.doctor.command.DoctorCreateCommand;
 import com.knagmed.clinic.doctor.dao.DoctorRepository;
 import com.knagmed.clinic.doctor.dao.SpecializationRepository;
+import com.knagmed.clinic.entity.Address;
 import com.knagmed.clinic.visit.dao.VisitRepository;
 import com.knagmed.clinic.doctor.dto.DoctorDTO;
 import com.knagmed.clinic.entity.Doctor;
@@ -14,6 +17,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -25,6 +29,7 @@ public class DoctorService{
     private final VisitRepository visitRepository;
     private final SpecializationRepository specializationRepository;
     private final DoctorRepository doctorRepository;
+    private final AddressRepository addressRepository;
 
     @Value("${doctor.page.size}")
     private Integer doctorPageSize;
@@ -67,8 +72,26 @@ public class DoctorService{
             .orElseThrow(() -> new IllegalArgumentException(String.format("Patient with ID=%d not found", id)));
     }
 
-    public Doctor save(Doctor t) {
-        return doctorRepository.save(t);
+    public Doctor save(DoctorCreateCommand command) {
+        //TODO to trzeba poprawić
+        Address address = new Address(command.getPostCode(), command.getCity(), command.getHomeNumber());
+
+        List<Specialization> specializations = Arrays.stream(command.getSpecializations())
+            .map(s -> {
+                Optional<Specialization> spec = specializationRepository.findByName(s);
+                return spec.orElseGet(() -> specializationRepository.save(new Specialization(s)));
+            })
+            .collect(Collectors.toList());
+
+        Address saved = addressRepository.save(address);
+        Doctor entity = new Doctor(
+            command.getFirstName(),
+            command.getLastName(),
+            null,
+            saved,
+            specializations
+        );
+        return doctorRepository.save(entity);
     }
 
     public List<Doctor> getAll() {

@@ -1,6 +1,7 @@
 package com.knagmed.clinic.doctor.client;
 
 import com.knagmed.clinic.doctor.DoctorService;
+import com.knagmed.clinic.doctor.command.DoctorCreateCommand;
 import com.knagmed.clinic.doctor.dto.DoctorDTO;
 import com.knagmed.clinic.entity.Doctor;
 import com.knagmed.clinic.entity.Specialization;
@@ -10,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,8 +24,8 @@ public class DoctorController{
     private final DoctorService doctorService;
 
     @PostMapping
-    public Doctor save(@RequestBody Doctor t){
-        return doctorService.save(t);
+    public Doctor addDoctor(@RequestBody DoctorCreateCommand command){
+        return doctorService.save(command);
     }
 
     @GetMapping("/{id}")
