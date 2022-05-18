@@ -20,7 +20,7 @@ public class Person {
     @NotNull
     protected String lastName;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userId")
     protected AppUser appUser;
 

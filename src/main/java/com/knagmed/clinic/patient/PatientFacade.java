@@ -1,6 +1,7 @@
 package com.knagmed.clinic.patient;
 
 import com.knagmed.clinic.entity.Patient;
+import com.knagmed.clinic.patient.client.command.CreatePatientCommand;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -26,8 +27,8 @@ public class PatientFacade {
         patientService.deletePatientAndRelatedVisitdByPesel(id);
     }
 
-    public void addPatient(Patient patient) {
-        patientService.save(patient);
+    public void addPatient(CreatePatientCommand command) {
+        patientService.save(command);
     }
 
     public Patient findPatientByPesel(Long pesel) {

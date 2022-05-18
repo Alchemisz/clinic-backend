@@ -3,11 +3,13 @@ package com.knagmed.clinic.patient.client;
 import com.knagmed.clinic.entity.Patient;
 import com.knagmed.clinic.exception.ApiRequestException;
 import com.knagmed.clinic.patient.PatientFacade;
+import com.knagmed.clinic.patient.client.command.CreatePatientCommand;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,8 +36,8 @@ public class PatientController {
     }
 
     @PostMapping
-    public void addPatient(@RequestBody Patient patient) {
-        patientFacade.addPatient(patient);
+    public void addPatient(@Valid @RequestBody CreatePatientCommand command) {
+        patientFacade.addPatient(command);
     }
 
     @GetMapping("/{pesel}")

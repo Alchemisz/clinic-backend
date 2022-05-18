@@ -1,15 +1,21 @@
 package com.knagmed.clinic.patient;
 
-import com.knagmed.clinic.patient.dao.PatientRepository;
-import com.knagmed.clinic.visit.dao.VisitRepository;
-import com.knagmed.clinic.entity.Patient;
-import com.knagmed.clinic.security.auth.AppUser;
 import com.knagmed.clinic.appuser.LoggedUserService;
+import com.knagmed.clinic.common.AddressRepository;
+import com.knagmed.clinic.entity.Address;
+import com.knagmed.clinic.entity.Patient;
+import com.knagmed.clinic.patient.client.command.CreatePatientCommand;
+import com.knagmed.clinic.patient.dao.PatientRepository;
+import com.knagmed.clinic.security.auth.AppUser;
+import com.knagmed.clinic.security.auth.AppUserRepository;
+import com.knagmed.clinic.security.auth.AppUserRole;
+import com.knagmed.clinic.visit.dao.VisitRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +29,9 @@ public class PatientService {
     private final VisitRepository visitRepository;
     private final LoggedUserService loggedUserService;
     private final PatientRepository patientRepository;
+    private final AppUserRepository appUserRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final AddressRepository addressRepository;
 
     @Value("${patient.page.size}")
     private Integer patientPageSize;
@@ -33,15 +42,15 @@ public class PatientService {
     public Page<Patient> getByPagination(Optional<Integer> page, Optional<String> value, Optional<String> sortBy) {
 
         PageRequest paginationSetup = PageRequest.of(
-                page.orElse(0),
-                patientPageSize,
-                Sort.Direction.ASC, sortBy.orElse(patientDefaultSortField)
+            page.orElse(0),
+            patientPageSize,
+            Sort.Direction.ASC, sortBy.orElse(patientDefaultSortField)
         );
-        if (value.isPresent()){
+        if (value.isPresent()) {
             String searchPhrase = value.get();
             if (searchPhrase.length() == 11)
                 return patientRepository.findPatientsByPeselEquals(Long.valueOf(searchPhrase), paginationSetup);
-            return  patientRepository.findPatientsByPeselGreaterThanEqual(Long.valueOf(searchPhrase + "0".repeat(11 - searchPhrase.length())), paginationSetup);
+            return patientRepository.findPatientsByPeselGreaterThanEqual(Long.valueOf(searchPhrase + "0".repeat(11 - searchPhrase.length())), paginationSetup);
         }
 
         return patientRepository.findAll(paginationSetup);
@@ -65,11 +74,15 @@ public class PatientService {
 
     public Patient getPatientByPesel(Long pesel) {
         return patientRepository.findById(pesel).
-                orElseThrow(() -> new IllegalArgumentException(String.format("Can not find patient with ID = %d", pesel)));
+            orElseThrow(() -> new IllegalArgumentException(String.format("Can not find patient with ID = %d", pesel)));
     }
 
     @Transactional
-    public void save(Patient patient) {
+    public void save(CreatePatientCommand command) {
+        AppUser appUser = appUserRepository.save(new AppUser(command.getUsername(), passwordEncoder.encode(command.getPassword()), List.of(AppUserRole.USER)));
+        Address address = addressRepository.save(new Address(command.getAddress().getPostCode(), command.getAddress().getCity(), command.getAddress().getHouseNumber()));
+        Patient patient = new Patient(command.getFirstName(), command.getLastName(), appUser,
+            address, command.getPesel());
         patientRepository.save(patient);
     }
 }
