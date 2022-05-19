@@ -24,4 +24,6 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
     @Query(nativeQuery = true, value = "UPDATE PATIENT p SET p.user_id =:userId WHERE p.pesel =:patientPesel")
     void assignUserToPatient(@Param("patientPesel") Long patientPesel, @Param("userId") Long userId);
 
+    boolean existsByPesel(Long pesel);
+
 }

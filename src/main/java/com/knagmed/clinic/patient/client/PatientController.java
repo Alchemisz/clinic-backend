@@ -4,6 +4,7 @@ import com.knagmed.clinic.entity.Patient;
 import com.knagmed.clinic.exception.ApiRequestException;
 import com.knagmed.clinic.patient.PatientFacade;
 import com.knagmed.clinic.patient.client.command.CreatePatientCommand;
+import com.knagmed.clinic.patient.client.command.CreatePeselCommand;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -53,5 +54,10 @@ public class PatientController {
     @GetMapping("/pesel")
     public Long getUserPesel(){
         return patientFacade.getCurrentLoggedUserPesel();
+    }
+
+    @PostMapping("/pesel/generate")
+    public String generatePesel(@Valid @RequestBody CreatePeselCommand command){
+        return patientFacade.generatePesel(command);
     }
 }

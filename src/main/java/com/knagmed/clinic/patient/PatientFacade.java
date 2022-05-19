@@ -2,6 +2,7 @@ package com.knagmed.clinic.patient;
 
 import com.knagmed.clinic.entity.Patient;
 import com.knagmed.clinic.patient.client.command.CreatePatientCommand;
+import com.knagmed.clinic.patient.client.command.CreatePeselCommand;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import java.util.Optional;
 public class PatientFacade {
 
     private final PatientService patientService;
+    private final PeselGenerator peselGenerator;
 
     public Page<Patient> getByPagination(Optional<Integer> page, Optional<String> value, Optional<String> sortBy) {
         return patientService.getByPagination(page, value, sortBy);
@@ -37,5 +39,9 @@ public class PatientFacade {
 
     public Long getCurrentLoggedUserPesel() {
         return patientService.getUserPesel();
+    }
+
+    public String generatePesel(CreatePeselCommand command) {
+        return peselGenerator.generate(command.getDateOfBirth());
     }
 }

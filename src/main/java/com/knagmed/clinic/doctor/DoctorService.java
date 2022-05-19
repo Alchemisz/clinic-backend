@@ -94,7 +94,4 @@ public class DoctorService{
         return doctorRepository.save(entity);
     }
 
-    public List<Doctor> getAll() {
-        return doctorRepository.findAll();
-    }
 }
