@@ -49,20 +49,20 @@ public class PatientService {
         if (value.isPresent()) {
             String searchPhrase = value.get();
             if (searchPhrase.length() == 11)
-                return patientRepository.findPatientsByPeselEquals(Long.valueOf(searchPhrase), paginationSetup);
-            return patientRepository.findPatientsByPeselGreaterThanEqual(Long.valueOf(searchPhrase + "0".repeat(11 - searchPhrase.length())), paginationSetup);
+                return patientRepository.findPatientsByPeselEquals(searchPhrase, paginationSetup);
+            return patientRepository.findPatientsByPeselGreaterThanEqual(searchPhrase + "0".repeat(11 - searchPhrase.length()), paginationSetup);
         }
 
         return patientRepository.findAll(paginationSetup);
     }
 
     @Transactional
-    public void deletePatientAndRelatedVisitdByPesel(Long patientPesel) {
+    public void deletePatientAndRelatedVisitdByPesel(String patientPesel) {
         visitRepository.deleteAllByPatientPesel(patientPesel);
         patientRepository.deleteById(patientPesel);
     }
 
-    public Long getUserPesel() {
+    public String getUserPesel() {
         AppUser appUser = loggedUserService.getCurrentLoggedUser();
         Patient patientByAppUser = patientRepository.findPatientByAppUser(appUser);
         return patientByAppUser.getPesel();
@@ -72,7 +72,7 @@ public class PatientService {
         return patientRepository.findAll();
     }
 
-    public Patient getPatientByPesel(Long pesel) {
+    public Patient getPatientByPesel(String pesel) {
         return patientRepository.findById(pesel).
             orElseThrow(() -> new IllegalArgumentException(String.format("Can not find patient with ID = %d", pesel)));
     }

@@ -8,6 +8,6 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class VisitCreateCommand {
     private Long doctorId;
-    private Long patientPesel;
+    private String patientPesel;
     private LocalDate visitDate;
 }

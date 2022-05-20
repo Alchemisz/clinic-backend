@@ -14,7 +14,7 @@
             <column name="is_ended" type="bool">
                 <constraints nullable="false"/>
             </column>
-            <column name="patient_pesel" type="bigint">
+            <column name="patient_pesel" type="varchar2(11)">
                 <constraints nullable="false" foreignKeyName="FK_VISIT_PATIENT" referencedColumnNames="pesel" referencedTableName="patient"/>
             </column>
             <column name="doctor_id" type="bigint">

@@ -12,18 +12,18 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-public interface PatientRepository extends JpaRepository<Patient, Long> {
+public interface PatientRepository extends JpaRepository<Patient, String> {
 
-    Page<Patient> findPatientsByPeselGreaterThanEqual(Long pesel, Pageable pageable);
-    Page<Patient> findPatientsByPeselEquals(Long pesel, Pageable pageable);
+    Page<Patient> findPatientsByPeselGreaterThanEqual(String pesel, Pageable pageable);
+    Page<Patient> findPatientsByPeselEquals(String pesel, Pageable pageable);
 
     Patient findPatientByAppUser(AppUser appUser);
 
     @Transactional
     @Modifying(clearAutomatically = true)
     @Query(nativeQuery = true, value = "UPDATE PATIENT p SET p.user_id =:userId WHERE p.pesel =:patientPesel")
-    void assignUserToPatient(@Param("patientPesel") Long patientPesel, @Param("userId") Long userId);
+    void assignUserToPatient(@Param("patientPesel") String patientPesel, @Param("userId") Long userId);
 
-    boolean existsByPesel(Long pesel);
+    boolean existsByPesel(String pesel);
 
 }

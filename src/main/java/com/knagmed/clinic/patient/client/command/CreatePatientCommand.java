@@ -19,7 +19,7 @@ public class CreatePatientCommand {
     @NotNull
     private String lastName;
     @NotNull
-    private Long pesel;
+    private String pesel;
     @NotNull
     private Address address;
 

@@ -7,7 +7,7 @@
     <changeSet id="5" author="Adrian">
 
         <createTable tableName="PATIENT">
-            <column name="pesel" type="bigint">
+            <column name="pesel" type="varchar2(11)">
                 <constraints nullable="false" primaryKey="true" unique="true"/>
             </column>
             <column name="first_name" type="varchar(255)"/>

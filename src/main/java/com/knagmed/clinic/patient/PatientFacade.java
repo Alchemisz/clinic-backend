@@ -25,7 +25,7 @@ public class PatientFacade {
         return patientService.getAll();
     }
 
-    public void deletePatientAndRelatedVisitsByPatientPesel(Long id) {
+    public void deletePatientAndRelatedVisitsByPatientPesel(String id) {
         patientService.deletePatientAndRelatedVisitdByPesel(id);
     }
 
@@ -33,11 +33,11 @@ public class PatientFacade {
         patientService.save(command);
     }
 
-    public Patient findPatientByPesel(Long pesel) {
+    public Patient findPatientByPesel(String pesel) {
         return patientService.getPatientByPesel(pesel);
     }
 
-    public Long getCurrentLoggedUserPesel() {
+    public String getCurrentLoggedUserPesel() {
         return patientService.getUserPesel();
     }
 

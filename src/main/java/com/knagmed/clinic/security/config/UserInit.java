@@ -33,11 +33,11 @@ public class UserInit {
         appUserRepository.save(new AppUser("adi", passwordEncoder.encode("password"), List.of(AppUserRole.USER)));
 
 
-        patientRepository.assignUserToPatient(99143892552L, 1L);
-        patientRepository.assignUserToPatient(83113322553L, 2L);
-        patientRepository.assignUserToPatient(96213762554L, 3L);
-        patientRepository.assignUserToPatient(89154326551L, 4L);
-        patientRepository.assignUserToPatient(79133345552L, 5L);
+        patientRepository.assignUserToPatient("99143892552", 1L);
+        patientRepository.assignUserToPatient("83113322553", 2L);
+        patientRepository.assignUserToPatient("96213762554", 3L);
+        patientRepository.assignUserToPatient("89154326551", 4L);
+        patientRepository.assignUserToPatient("79133345552", 5L);
 
     }
 }

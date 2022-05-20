@@ -32,7 +32,7 @@ public class PatientController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    public void delete(@PathVariable String id) {
         patientFacade.deletePatientAndRelatedVisitsByPatientPesel(id);
     }
 
@@ -42,7 +42,7 @@ public class PatientController {
     }
 
     @GetMapping("/{pesel}")
-    public Patient getById(@PathVariable Long pesel){
+    public Patient getById(@PathVariable String pesel) {
         return patientFacade.findPatientByPesel(pesel);
     }
 
@@ -52,12 +52,12 @@ public class PatientController {
     }
 
     @GetMapping("/pesel")
-    public Long getUserPesel(){
+    public String getUserPesel() {
         return patientFacade.getCurrentLoggedUserPesel();
     }
 
     @PostMapping("/pesel/generate")
-    public String generatePesel(@Valid @RequestBody CreatePeselCommand command){
+    public String generatePesel(@Valid @RequestBody CreatePeselCommand command) {
         return patientFacade.generatePesel(command);
     }
 }

@@ -14,9 +14,9 @@ public class Patient extends Person{
 
     @Id
     @Column(name = "pesel", unique = true, nullable = false)
-    private Long pesel;
+    private String pesel;
 
-    public Patient(@NotNull String firstName, @NotNull String lastName, AppUser appUser, Address address, Long pesel) {
+    public Patient(@NotNull String firstName, @NotNull String lastName, AppUser appUser, Address address, String pesel) {
         super(firstName, lastName, appUser, address);
         this.pesel = pesel;
     }

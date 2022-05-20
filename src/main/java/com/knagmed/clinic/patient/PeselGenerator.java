@@ -32,7 +32,7 @@ public class PeselGenerator {
     }
 
     String generatedPesel = peselStringBuilder.toString();
-    if (patientRepository.existsByPesel(Long.valueOf(generatedPesel))) {
+    if (patientRepository.existsByPesel(generatedPesel)) {
       generate(date);
     }
 
