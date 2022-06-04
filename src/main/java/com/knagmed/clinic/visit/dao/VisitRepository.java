@@ -38,5 +38,5 @@ public interface VisitRepository extends JpaRepository<Visit, Long> {
     void setEndedById(@Param("visitId") Long visitId);
 
     @Query(value = "SELECT v FROM Visit v WHERE v.patient.pesel = :patientPesel AND v.isEnded = false")
-    List<Visit> findVisitByEndedIsFalseAndPatientEquals(@Param("patientPesel") Long patientPesel);
+    List<Visit> findVisitByEndedIsFalseAndPatientEquals(@Param("patientPesel") String patientPesel);
 }

@@ -84,7 +84,7 @@ public class VisitService{
         visitRepository.save(visit);
     }
 
-    public List<VisitDTO> getVisitsByPatientPesel(Long pesel) {
+    public List<VisitDTO> getVisitsByPatientPesel(String pesel) {
         List<Visit> visitByPatient = visitRepository.findVisitByEndedIsFalseAndPatientEquals(pesel);
         return visitByPatient.stream()
                 .map(visit -> VisitDTO.builder()

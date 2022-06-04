@@ -26,4 +26,6 @@ public interface PatientRepository extends JpaRepository<Patient, String> {
 
     boolean existsByPesel(String pesel);
 
+    Patient findPatientByPesel(String pesel);
+
 }

@@ -1,7 +1,8 @@
 package com.knagmed.clinic.doctor.client;
 
 import com.knagmed.clinic.doctor.DoctorService;
-import com.knagmed.clinic.doctor.command.DoctorCreateCommand;
+import com.knagmed.clinic.doctor.command.CreateDoctorCommand;
+import com.knagmed.clinic.doctor.command.UpdateDoctorCommand;
 import com.knagmed.clinic.doctor.dto.DoctorDTO;
 import com.knagmed.clinic.entity.Doctor;
 import com.knagmed.clinic.entity.Specialization;
@@ -11,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,7 +25,7 @@ public class DoctorController{
     private final DoctorService doctorService;
 
     @PostMapping
-    public Doctor addDoctor(@RequestBody DoctorCreateCommand command){
+    public Doctor addDoctor(@Valid @RequestBody CreateDoctorCommand command){
         return doctorService.save(command);
     }
 
@@ -32,9 +34,9 @@ public class DoctorController{
         return doctorService.getDoctorById(id);
     }
 
-    @PutMapping
-    public ResponseEntity<Doctor> update(@RequestBody Doctor t) {
-        throw new ApiRequestException("This method is not implemented yet!");
+    @PatchMapping("/{id}")
+    public void update(@PathVariable Long id, @Valid @RequestBody UpdateDoctorCommand command) {
+        doctorService.updateDoctor(command, id);
     }
 
     @GetMapping("/pageable")

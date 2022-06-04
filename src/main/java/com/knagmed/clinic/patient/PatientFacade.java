@@ -3,6 +3,7 @@ package com.knagmed.clinic.patient;
 import com.knagmed.clinic.entity.Patient;
 import com.knagmed.clinic.patient.client.command.CreatePatientCommand;
 import com.knagmed.clinic.patient.client.command.CreatePeselCommand;
+import com.knagmed.clinic.patient.client.command.UpdatePatientCommand;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -43,5 +44,9 @@ public class PatientFacade {
 
     public String generatePesel(CreatePeselCommand command) {
         return peselGenerator.generate(command.getDateOfBirth());
+    }
+
+    public void updatePatient(UpdatePatientCommand command) {
+        patientService.updatePatient(command);
     }
 }

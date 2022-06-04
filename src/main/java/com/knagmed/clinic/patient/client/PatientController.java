@@ -1,13 +1,12 @@
 package com.knagmed.clinic.patient.client;
 
 import com.knagmed.clinic.entity.Patient;
-import com.knagmed.clinic.exception.ApiRequestException;
 import com.knagmed.clinic.patient.PatientFacade;
 import com.knagmed.clinic.patient.client.command.CreatePatientCommand;
 import com.knagmed.clinic.patient.client.command.CreatePeselCommand;
+import com.knagmed.clinic.patient.client.command.UpdatePatientCommand;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -46,9 +45,9 @@ public class PatientController {
         return patientFacade.findPatientByPesel(pesel);
     }
 
-    @PutMapping
-    public ResponseEntity<Patient> update(@RequestBody Patient t) {
-        throw new ApiRequestException("This method is not implemented yet!");
+    @PatchMapping("/update")
+    public void updatePatient(@Valid @RequestBody UpdatePatientCommand command) {
+        patientFacade.updatePatient(command);
     }
 
     @GetMapping("/pesel")

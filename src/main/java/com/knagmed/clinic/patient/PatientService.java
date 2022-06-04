@@ -5,6 +5,7 @@ import com.knagmed.clinic.common.AddressRepository;
 import com.knagmed.clinic.entity.Address;
 import com.knagmed.clinic.entity.Patient;
 import com.knagmed.clinic.patient.client.command.CreatePatientCommand;
+import com.knagmed.clinic.patient.client.command.UpdatePatientCommand;
 import com.knagmed.clinic.patient.dao.PatientRepository;
 import com.knagmed.clinic.security.auth.AppUser;
 import com.knagmed.clinic.security.auth.AppUserRepository;
@@ -84,5 +85,19 @@ public class PatientService {
         Patient patient = new Patient(command.getFirstName(), command.getLastName(), appUser,
             address, command.getPesel());
         patientRepository.save(patient);
+    }
+
+    @Transactional
+    public void updatePatient(UpdatePatientCommand command) {
+        Patient patientByPesel = patientRepository.findPatientByPesel(command.getPesel());
+        Address address = patientByPesel.getAddress();
+        patientByPesel.setFirstName(command.getFirstName());
+        patientByPesel.setLastName(command.getLastName());
+        address.setCity(command.getCity());
+        address.setHouseNumber(command.getHomeNumber());
+        address.setPostCode(command.getPostCode());
+        addressRepository.save(address);
+        patientRepository.save(patientByPesel);
+
     }
 }

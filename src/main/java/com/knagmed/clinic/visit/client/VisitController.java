@@ -50,7 +50,7 @@ public class VisitController{
     }
 
     @GetMapping("/upcoming/patient/{pesel}")
-    public List<VisitDTO> getPatientsVisits(@PathVariable Long pesel){
+    public List<VisitDTO> getPatientsVisits(@PathVariable String pesel){
         return visitService.getVisitsByPatientPesel(pesel);
     }
 
